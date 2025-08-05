@@ -1,30 +1,2573 @@
-// Configuração do PDF.js (define o caminho para os workers)
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
-
-// URL do PDF que você quer carregar
-const pdfUrl = 'https://cse-abaris-fileserver.s3.amazonaws.com/STORAGE/XML%20DIPLOMADO/2/057a0809-afda-4aa1-b1f7-1b7aaa4f1268.pdf?AWSAccessKeyId=ASIAYJY2E2K23QARCY44&Expires=1754464190&x-amz-security-token=IQoJb3JpZ2luX2VjEBwaCXVzLWVhc3QtMSJGMEQCIDRXVFWNweV1yh0s3BI9YdPuQAKdhIpSwT4nFDYNic0eAiBHnt26kri9fDJ1WNwLRljcwp2VKz%2FcdPeKSpeQg00GqSrrAwhVEAMaDDU3MDc0ODYyMTQ5MyIMRZmzvfyu3HGhfvR2KsgD%2BN1pWwlLWeONRKsA3wXt5rZaI82Darn42O%2B%2FZnQ1g6G0uxzWL1wuEcN8a14v%2B0rLEeuXk6HpTegWLFWXCwHVsvpcDxHwanYSqIBvO1LAGk7VwPfTRqpOe5EaTRvuedXPD0OtLdT0AnF%2FUSGsATHX4GdJReolgJIFJLlkAcmbaArWePe6SjhRBB7LZ%2BJZnjo%2FvI3MGoW3UEOp1c8aImjO9vgSzdxHYuH8%2B%2BRc36P5FroLHKgLxam1NUwafanRXmJoYDRs7thEDzpArsWIsVb7m223Boz919E%2BPlxrydDPIZe%2BcPO0YvvvfmiuQPIbT5UhHGFsNaX2cSpOwOyb534iyD1lZpmKDeVkIKi7hqCfZ9tcFhsAWYnH1FJMWuo5%2BMHFSiCXM1%2F40uj6574xpMSZe3VqddxXrA1%2BAcgt9A3NQX3gvOS3QAMo9BkikVpHsgaZUcKqee47l%2BeaFfAIRd7nkFCQaZ2yM7cvTC%2FvzQI1BCn2CO11Mjeu3EQSqOne8pcli1uGspzGL%2F4P%2B7jNWMy2S52ewgI1trk3Dt7bE6W2YJfR9jAnjWojiaTFZqbkcIbepYd7LGaM1%2FSpegAhuEk8M4YaGxfMSlA%2BMOX%2FxcQGOqYBp3QAGEQK9j5AXfBWWtenugwsxGrsbYUlGiTLtv84TSL6%2BPvnw9MXiqcZcoOzxn%2BHRmN0XkBLaRhx1FJGTPKpRuLPpBbamBMUGcfc0dzF7%2FbZdKOsjuh8kbfAeyp8evPznDoZFo6wrTAq51W7fqKcANubPFLJtEwyCKqPE%2Bxk0fAYCQ4gKF7iy%2Bo732fnL%2BCqZcLCjIY2UyobOem2Bz10%2FojPFldidw%3D%3D&Signature=imR02mafdIiX5FufQTpYA4OXy5s%3D';
-
-// Elemento canvas onde o PDF será renderizado
-const canvas = document.querySelector('.pdf-canvas');
-const ctx = canvas.getContext('2d');
-
-// Carrega o PDF
-pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-    // Pega a primeira página do PDF
-    return pdf.getPage(1);
-}).then(function(page) {
-    // Define a escala de visualização (ajuste conforme necessário)
-    const viewport = page.getViewport({ scale: 1.5 });
-
-    // Ajusta o tamanho do canvas para o tamanho da página
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    // Renderiza a página do PDF no canvas
-    page.render({
-        canvasContext: ctx,
-        viewport: viewport
-    });
-}).catch(function(error) {
-    console.error('Erro ao carregar o PDF:', error);
-});
+!function(e, t) {
+    if ("object" == typeof exports && "object" == typeof module)
+        module.exports = t();
+    else if ("function" == typeof define && define.amd)
+        define([], t);
+    else {
+        var i = t();
+        for (var n in i)
+            ("object" == typeof exports ? exports : e)[n] = i[n]
+    }
+}(window, (function() {
+    return function(e) {
+        function t(t) {
+            for (var n, r, s = t[0], c = t[1], l = t[2], u = 0, b = []; u < s.length; u++)
+                r = s[u],
+                Object.prototype.hasOwnProperty.call(a, r) && a[r] && b.push(a[r][0]),
+                a[r] = 0;
+            for (n in c)
+                Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]);
+            for (d && d(t); b.length; )
+                b.shift()();
+            return o.push.apply(o, l || []),
+            i()
+        }
+        function i() {
+            for (var e, t = 0; t < o.length; t++) {
+                for (var i = o[t], n = !0, s = 1; s < i.length; s++) {
+                    var c = i[s];
+                    0 !== a[c] && (n = !1)
+                }
+                n && (o.splice(t--, 1),
+                e = r(r.s = i[0]))
+            }
+            return e
+        }
+        var n = {}
+          , a = {
+            23: 0,
+            24: 0,
+            26: 0,
+            27: 0,
+            28: 0,
+            29: 0,
+            30: 0,
+            31: 0
+        }
+          , o = [];
+        function r(t) {
+            if (n[t])
+                return n[t].exports;
+            var i = n[t] = {
+                i: t,
+                l: !1,
+                exports: {}
+            };
+            return e[t].call(i.exports, i, i.exports, r),
+            i.l = !0,
+            i.exports
+        }
+        r.e = function() {
+            return Promise.resolve()
+        }
+        ,
+        r.m = e,
+        r.c = n,
+        r.d = function(e, t, i) {
+            r.o(e, t) || Object.defineProperty(e, t, {
+                enumerable: !0,
+                get: i
+            })
+        }
+        ,
+        r.r = function(e) {
+            "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                value: "Module"
+            }),
+            Object.defineProperty(e, "__esModule", {
+                value: !0
+            })
+        }
+        ,
+        r.t = function(e, t) {
+            if (1 & t && (e = r(e)),
+            8 & t)
+                return e;
+            if (4 & t && "object" == typeof e && e && e.__esModule)
+                return e;
+            var i = Object.create(null);
+            if (r.r(i),
+            Object.defineProperty(i, "default", {
+                enumerable: !0,
+                value: e
+            }),
+            2 & t && "string" != typeof e)
+                for (var n in e)
+                    r.d(i, n, function(t) {
+                        return e[t]
+                    }
+                    .bind(null, n));
+            return i
+        }
+        ,
+        r.n = function(e) {
+            var t = e && e.__esModule ? function() {
+                return e.default
+            }
+            : function() {
+                return e
+            }
+            ;
+            return r.d(t, "a", t),
+            t
+        }
+        ,
+        r.o = function(e, t) {
+            return Object.prototype.hasOwnProperty.call(e, t)
+        }
+        ,
+        r.p = "./",
+        r.oe = function(e) {
+            throw console.error(e),
+            e
+        }
+        ;
+        var s = window.webpackJsonp = window.webpackJsonp || []
+          , c = s.push.bind(s);
+        s.push = t,
+        s = s.slice();
+        for (var l = 0; l < s.length; l++)
+            t(s[l]);
+        var d = c;
+        return o.push([287, 0]),
+        i()
+    }({
+        147: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.ptBr = void 0,
+            t.ptBr = {
+                notDocSent: "Nenhum documento enviado.",
+                close: "Fechar",
+                save: "Salvar",
+                page: "Página",
+                of: "de",
+                name: "Nome",
+                validate: "Validade",
+                emitter: "Emissor",
+                date: "Data",
+                signatureLocation: "Definir local de assinatura",
+                chooseYourSignature: "Escolha sua assinatura",
+                chooseSignature: "Escolha uma assinatura",
+                whatNameSignature: "* Qual o nome para sua assinatura?",
+                generateSignature: "Gerar assinatura",
+                chooseSignatureUsed: "* Escolha abaixo a assinatura que será utilizada em todo o documento:",
+                clickUsedSignature: "Clique em Ok para utilizar a assinatura escolhida:",
+                callbackMustBeFunction: "O callback deve ser uma função.",
+                thereAreUnsavedItems: "Existe itens não salvos na página, deseja sair mesmo assim?",
+                errorLoadDoc: "Ocorreu um erro ao carregar o Doc.: ",
+                signHere: "Assinar aqui",
+                rubricateHere: "Rubricar aqui",
+                subscriber: "Assinante",
+                signature: "Assinatura",
+                rubric: "Rubrica",
+                subscriptionLimitReached: "O limite total de assinaturas foi atingido.",
+                certificateLimitReached: "O limite total de certificados foi atingido.",
+                deleteMarkup: "Tem certeza que deseja excluir a marcação?",
+                deleteAllMarkup: "Tem certeza que deseja excluir toda(s) a(s) marcação(ões) da página?",
+                selectMarkup: "Por favor, selecione uma marcação.",
+                markNotFound: "Marcação não foi encontrada!",
+                incorrectPageNumber: "Número da página incorreta.",
+                requiredField: "Obrigatório",
+                invalidEmail: "E-mail inválido",
+                onlyNumbers: "Somente números",
+                minInvalid: "O valor deve ser maior que ",
+                maxInvalid: "O valor deve ser menor que ",
+                certificatesNotFound: "Nenhum certificado foi encontrado.",
+                chooseYourCertificate: "* Qual certificado irá utilizar para assinar?",
+                maxFilesNumberUpload: "O número máximo de arquivos para esse componente é ",
+                theFile: "O arquivo ",
+                hasZeroSize: " possui tamanho zero",
+                theFileSize: "O tamanho do arquivo ",
+                maxFilesSizeUpload: " é maior que o permitido. Tamanho máximo permitido ",
+                filesTypeUpload: " possui um tipo não permitido. Tipos de arquivos permitidos: ",
+                form: "Formulário",
+                execute: "Executar",
+                formSuccessRegister: "Formulário cadastrado com sucesso!",
+                formSuccessUpdated: "Formulário atualizado com sucesso!",
+                flowSuccessStarted: "Fluxo iniciado com sucesso!",
+                flowSuccessUpdated: "Fluxo atualizado com sucesso!",
+                taskSuccessExecuted: "Tarefa executada com sucesso!",
+                failedLoadMap: "Falha ao carregar o mapa.",
+                chooseFile: "Escolher arquivo(s)",
+                uploadFileTitle: "Enviar arquivo(s)",
+                dropTheFileHere: "Solte o(s) documento(s) aqui, ou clique para escolher",
+                optSelect: "Selecione...",
+                genericError: "Algo de errado ocorreu ao tentar realizar a sua solicitação. Por favor tente novamente em instantes!",
+                errorExternalWebService: "Algo de errado ocorreu ao tentar realizar a chamada do serviço externo. Por favor tente novamente em instantes!",
+                showing: "Exibindo",
+                to: "até",
+                records: "registros",
+                noItemsFounds: "Nenhum item foi localizado.",
+                first: "Primeiro",
+                last: "Último",
+                signatureAlreadyChecked: "Uma ou mais assinaturas marcadas",
+                rubricAlreadyChecked: "Uma ou mais rubricas marcadas",
+                signatureNotChecked: "Nenhuma assinatura marcada",
+                rubricNotChecked: "Nenhuma rubrica marcada",
+                chooseYourRubric: "Escolha sua rubrica",
+                whatNameRubric: "* Qual o nome para sua rubrica?",
+                generateRubric: "Gerar Rubrica",
+                chooseRubric: "* Escolha abaixo a rubrica que será utilizada em todo o documento:",
+                clickUsedRubric: "Clique em Ok para utilizar a rubrica escolhida:",
+                previousAppointment: "Ir para a assinatura/rubrica anterior.",
+                next: "Próxima",
+                previous: "Anterior",
+                nextAppointment: "Ir para a assinatura/rubrica seguinte.",
+                errorFormTypeProcess: "O Formulário é do tipo processo e só pode ser utilizado na função novo fluxo.",
+                errorFormTypeDoc: "O Formulário é do tipo documento e só pode ser utilizado na função novo documento.",
+                selectOneMarkupType: "Selecione uma das opções: Assinatura e/ou Rubrica!",
+                wereCompleted: "Concluída(s)",
+                signatures: "assinatura(s)",
+                invalidCNPJ: "CNPJ Inválido",
+                invalidCEP: "CEP Inválido",
+                invalidPassword: "Senha Inválida",
+                notMatchPassword: "Senhas não coincidem",
+                menu: "Menu de documentos",
+                pageUp: "Página anterior",
+                pageDown: "Página seguinte",
+                zoomIn: "Aumentar zoom",
+                zoomOut: "Diminuir zoom",
+                fullscreen: "Tela cheia",
+                fullscreenOff: "Sair da tela cheia",
+                signLocation: "Definir local de assinatura no documento",
+                deleteSelected: "Excluir marcação selecionada",
+                clearActivePage: "Deletar todas as marcações"
+            }
+        },
+        148: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.enUS = void 0,
+            t.enUS = {
+                notDocSent: "No documents sent.",
+                close: "Close",
+                save: "Save",
+                page: "Page",
+                of: "of",
+                name: "Name",
+                validate: "Validate",
+                emitter: "Emitter",
+                date: "Date",
+                signatureLocation: "Set subscription location",
+                chooseYourSignature: "Choose your signature",
+                chooseSignature: "Choose a signature",
+                whatNameSignature: "* What is your subscription name?",
+                generateSignature: "Generate signature",
+                chooseSignatureUsed: "* Choose below the signature that will be used throughout the document:",
+                clickUsedSignature: "Click Ok to use your chosen signature:",
+                callbackMustBeFunction: "Callback must be a function.",
+                thereAreUnsavedItems: "There are unsaved items on the page, would you like to leave anyway?",
+                errorLoadDoc: "There was an error loading Doc.: ",
+                signHere: "Sign here",
+                rubricateHere: "Rubricate here",
+                subscriber: "Subscriber",
+                signature: "Signature",
+                rubric: "Rubric",
+                subscriptionLimitReached: "Total subscription limit reached.",
+                certificateLimitReached: "Total certificate limit reached.",
+                deleteMarkup: "Are you sure you want to delete the markup?",
+                deleteAllMarkup: "Are you sure you want to delete all markups from the page?",
+                selectMarkup: "Please select a markup.",
+                markNotFound: "Markup not found!",
+                incorrectPageNumber: "Incorrect page number.",
+                requiredField: "Required",
+                invalidEmail: "Invalid e-mail",
+                onlyNumbers: "Only numbers",
+                minInvalid: "The value must be greater than ",
+                maxInvalid: "The value must be less than ",
+                certificatesNotFound: "No certificate was found.",
+                chooseYourCertificate: "* Which certificate will you use to sign?",
+                maxFilesNumberUpload: "The maximum number of files for this component is ",
+                theFile: "The file ",
+                hasZeroSize: " has zero size",
+                theFileSize: "The file size ",
+                maxFilesSizeUpload: " is larger than allowed. Maximum allowed size ",
+                filesTypeUpload: " has an unsupported type. Allowed file types: ",
+                form: "Form",
+                execute: "Execute",
+                formSuccessRegister: "Form successfully registered!",
+                formSuccessUpdated: "Form successfully updated!",
+                flowSuccessStarted: "Flow started successfully!",
+                flowSuccessUpdated: "Flow updated successfully!",
+                taskSuccessExecuted: "Task successfully executed!",
+                failedLoadMap: "Failed to load the map.",
+                chooseFile: "Choose file(s)",
+                uploadFileTitle: "Send file(s)",
+                dropTheFileHere: "Drop the document(s) here, or click to choose",
+                optSelect: "Select...",
+                genericError: "Something went wrong while trying to make your request. Please try again in a moment!",
+                errorExternalWebService: "Something went wrong when trying to call the external service. Please try again in a moment!",
+                showing: "Showing",
+                to: "to",
+                records: "records",
+                noItemsFounds: "No items were found.",
+                first: "First",
+                last: "Last",
+                signatureAlreadyChecked: "One or more signature already checked",
+                rubricAlreadyChecked: "Uma ou mais rubricas marcadas",
+                signatureNotChecked: "Any signature checked",
+                rubricNotChecked: "Any rubric checked",
+                chooseYourRubric: "Choose your rubric",
+                whatNameRubric: "* What is your rubric name?",
+                generateRubric: "Generate Rubric",
+                chooseRubric: "* Choose below the rubric that will be used throughout the document:",
+                clickUsedRubric: "Click Ok to use your chosen rubric:",
+                previousAppointment: "Go to previus subscription/rubric.",
+                next: "Next",
+                previous: "Previous",
+                nextAppointment: "Go to next subscription/rubric.",
+                errorFormTypeProcess: "The Form is of the process type and must be used to start a new flow.",
+                errorFormTypeDoc: "The Form is of the documento type and must be used to create a new document.",
+                selectOneMarkupType: "Select as options: subscription and/or rubric!",
+                wereCompleted: "Were completed",
+                signatures: "signature(s)",
+                menu: "Menu of documents",
+                pageUp: "Previous page",
+                pageDown: "Next page",
+                zoomIn: "Zoom in",
+                zoomOut: "Zoom out",
+                fullscreen: "Fullscreen",
+                fullscreenOff: "Exit fullscreen",
+                signLocation: "Set subscription location on document",
+                deleteSelected: "Delete selected markup",
+                clearActivePage: "Delete all markups"
+            }
+        },
+        150: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.Utils = void 0;
+            var n = i(162)
+              , a = function() {
+                function e() {
+                    this.listeningSelector(),
+                    this.customSelect(),
+                    this.initToastr()
+                }
+                return e.handleNovaJanela = function(e) {
+                    e.preventDefault();
+                    var t = e.target.getAttribute("href")
+                      , i = e.target.getAttribute("data-altura")
+                      , n = e.target.getAttribute("data-largura");
+                    n || i || (n = screen.availWidth,
+                    i = screen.availHeight),
+                    window.open(t, "links", "width=" + n + ", height=" + i)
+                }
+                ,
+                e.getMessage = function(e, t) {
+                    var i = t
+                      , n = "";
+                    return Object.keys(i).filter((function(t) {
+                        if (i[t].chave === e)
+                            return n = i[t].mensagem
+                    }
+                    )),
+                    n
+                }
+                ,
+                e.prototype.listeningSelector = function() {
+                    var e = {}
+                      , t = {}
+                      , i = 0
+                      , n = document.createElement("style")
+                      , a = document.head.appendChild(document.head.appendChild(n).cloneNode())
+                      , o = window.CSSKeyframesRule ? {
+                        css: "",
+                        event: "animationstart"
+                    } : {
+                        css: "-webkit-",
+                        event: "webkitAnimationStart"
+                    }
+                      , r = function(e) {
+                        return e.map(Function.prototype.call, String.prototype.trim).join(" ")
+                    }
+                      , s = function(t) {
+                        t.selector = (e[t.animationName] || {}).selector,
+                        ((this.selectorListeners || {})[t.animationName] || []).forEach((function(e) {
+                            e.call(this, t)
+                        }
+                        ), this)
+                    };
+                    HTMLDocument.prototype.addSelectorListener = HTMLElement.prototype.addSelectorListener = function(c, l) {
+                        var d = "string" == typeof c ? [c] : c
+                          , u = d.length > 1 ? r(c) : c
+                          , b = t[u]
+                          , f = this.selectorListeners = this.selectorListeners || {
+                            count: 0
+                        };
+                        if (b)
+                            e[b].count++;
+                        else {
+                            b = t[u] = "selector-listener-" + i++;
+                            var h = d.pop() + '::before { content: ""; ' + o.css + "animation: " + b + " 0.01s; }";
+                            n.sheet.insertRule(d.reduceRight((function(e, t) {
+                                return t + "{" + e + "}"
+                            }
+                            ), h), 0),
+                            e[b] = {
+                                count: 1,
+                                selector: u,
+                                keyframe: a.appendChild(document.createTextNode("@" + o.css + "keyframes " + b + " { to { outline-color: rgba(0,0,0,0) } }")),
+                                rule: n.sheet.cssRules[0]
+                            }
+                        }
+                        f.count ? f.count++ : this.addEventListener(o.event, s, !0),
+                        (f[b] = f[b] || []).push(l)
+                    }
+                    ,
+                    HTMLDocument.prototype.removeSelectorListener = HTMLElement.prototype.removeSelectorListener = function(i, c) {
+                        var l = "string" == typeof i ? i : r(i)
+                          , d = this.selectorListeners || {}
+                          , u = t[l]
+                          , b = d[u] || []
+                          , f = b.indexOf(c);
+                        if (f > -1) {
+                            var h = e[t[l]];
+                            --h.count || (n.sheet.deleteRule(n.sheet.cssRules.item(h.rule)),
+                            a.removeChild(h.keyframe),
+                            delete e[u],
+                            delete t[l]),
+                            d.count--,
+                            b.splice(f, 1),
+                            d.count || this.removeEventListener(o.event, s)
+                        }
+                    }
+                }
+                ,
+                e.getCdnUrlScript = function() {
+                    for (var e, t = document.getElementsByTagName("script"), i = 0; i < t.length; ++i)
+                        if (-1 !== t[i].src.indexOf("abFramework.main")) {
+                            e = new URL(t[i].src).origin;
+                            break
+                        }
+                    return e || "//cdn.abaris.com.br"
+                }
+                ,
+                e.prototype.customSelect = function() {
+                    var e, t, i, n, a, o, r, s = this;
+                    for (e = document.getElementsByClassName("input-content--select"),
+                    t = 0; t < e.length; t++) {
+                        for (n = e[t].getElementsByTagName("select")[0],
+                        (a = document.createElement("DIV")).setAttribute("class", "input input--select select-selected"),
+                        a.innerHTML = n.options[n.selectedIndex].innerHTML,
+                        e[t].appendChild(a),
+                        (o = document.createElement("DIV")).setAttribute("class", "select-items select-hide"),
+                        i = 1; i < n.length; i++)
+                            (r = document.createElement("DIV")).innerHTML = n.options[i].innerHTML,
+                            r.addEventListener("click", (function(e) {
+                                var t, i, n, a, o;
+                                for (a = r.parentNode.parentNode.getElementsByTagName("select")[0],
+                                o = r.parentNode.previousSibling,
+                                i = 0; i < a.length; i++)
+                                    if (a.options[i].innerHTML == r.innerHTML) {
+                                        for (a.selectedIndex = i,
+                                        o.innerHTML = r.innerHTML,
+                                        t = r.parentNode.getElementsByClassName("same-as-selected"),
+                                        n = 0; n < t.length; n++)
+                                            t[n].removeAttribute("class");
+                                        r.setAttribute("class", "same-as-selected");
+                                        break
+                                    }
+                                o.click()
+                            }
+                            )),
+                            o.appendChild(r);
+                        e[t].appendChild(o),
+                        a.addEventListener("click", (function(e) {
+                            e.stopPropagation(),
+                            s.closeAllSelect(s),
+                            a.nextSibling.classList.toggle("select-hide"),
+                            a.classList.toggle("select-arrow-active")
+                        }
+                        ))
+                    }
+                    document.addEventListener("click", this.closeAllSelect)
+                }
+                ,
+                e.prototype.closeAllSelect = function(e) {
+                    var t, i, n, a = [];
+                    for (t = document.getElementsByClassName("select-items"),
+                    i = document.getElementsByClassName("select-selected"),
+                    n = 0; n < i.length; n++)
+                        e == i[n] ? a.push(n) : i[n].classList.remove("select-arrow-active");
+                    for (n = 0; n < t.length; n++)
+                        a.indexOf(n) && t[n].classList.add("select-hide")
+                }
+                ,
+                e.wordWrap = function(e, t) {
+                    for (var i, n = "\n", a = ""; e.length > t; ) {
+                        var o = !1;
+                        for (i = t - 1; i >= 0; i--)
+                            if (this.testWhiteSpace(e.charAt(i))) {
+                                a += [e.slice(0, i), n].join(""),
+                                e = e.slice(i + 1),
+                                o = !0;
+                                break
+                            }
+                        o || (a += [e.slice(0, t), n].join(""),
+                        e = e.slice(t))
+                    }
+                    return a + e
+                }
+                ,
+                e.testWhiteSpace = function(e) {
+                    return new RegExp(/^\s$/).test(e.charAt(0))
+                }
+                ,
+                e.truncateString = function(e, t) {
+                    var i = e;
+                    return t < e.length ? i = e.slice(0, t) + "..." : t < 3 && (i = e.slice(0, 3) + "..."),
+                    i
+                }
+                ,
+                e.getRandomInt = function(e, t) {
+                    return e = Math.ceil(e),
+                    t = Math.floor(t),
+                    Math.floor(Math.random() * (t - e + 1)) + e
+                }
+                ,
+                e.prototype.initToastr = function() {
+                    n.options.closeButton = !0,
+                    n.options.debug = !1,
+                    n.options.newestOnTop = !1,
+                    n.options.progressBar = !0,
+                    n.options.positionClass = "toast-top-right",
+                    n.options.preventDuplicates = !0,
+                    n.options.onclick = null,
+                    n.options.showDuration = 300,
+                    n.options.hideDuration = 1e3,
+                    n.options.timeOut = 5e3,
+                    n.options.extendedTimeOut = 1e3,
+                    n.options.showEasing = "swing",
+                    n.options.hideEasing = "linear"
+                }
+                ,
+                e.prototype.getToastrWarning = function(e, t, i) {
+                    return n.warning(e, t, i)
+                }
+                ,
+                e.prototype.getToastrSuccess = function(e, t, i) {
+                    return n.success(e, t, i)
+                }
+                ,
+                e.prototype.getToastrError = function(e, t, i) {
+                    return n.error(e, t, i)
+                }
+                ,
+                e
+            }();
+            t.Utils = a
+        },
+        158: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.Translate = void 0;
+            var n = i(147)
+              , a = i(148)
+              , o = function() {
+                function e() {
+                    this.acceptLangs = ["pt-BR", "en-US"],
+                    this.currentLang = "pt-BR",
+                    this.initLanguage()
+                }
+                return e.getInstance = function() {
+                    return e.instance || (e.instance = new e),
+                    e.instance
+                }
+                ,
+                Object.defineProperty(e.prototype, "Lang", {
+                    get: function() {
+                        return this.currentLang
+                    },
+                    set: function(e) {
+                        if (e && -1 === this.acceptLangs.indexOf(e))
+                            throw new Error("Unsupported language: ".concat(e, "."));
+                        this.currentLang = e,
+                        this.initLanguage()
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                e.prototype.translate = function(e) {
+                    return this.objTranslate[e]
+                }
+                ,
+                e.prototype.initLanguage = function() {
+                    switch (this.currentLang) {
+                    case "en-US":
+                        this.objTranslate = a.enUS;
+                        break;
+                    default:
+                        this.objTranslate = n.ptBr
+                    }
+                }
+                ,
+                e
+            }();
+            t.Translate = o
+        },
+        164: function(e, t) {
+            var i = this && this.__spreadArray || function(e, t, i) {
+                if (i || 2 === arguments.length)
+                    for (var n, a = 0, o = t.length; a < o; a++)
+                        !n && a in t || (n || (n = Array.prototype.slice.call(t, 0, a)),
+                        n[a] = t[a]);
+                return e.concat(n || Array.prototype.slice.call(t))
+            }
+            ;
+            String.prototype.interpolate = function(e) {
+                var t = Object.keys(e)
+                  , n = Object.values(e);
+                try {
+                    return (new (Function.bind.apply(Function, i(i([void 0], t, !1), ["return `".concat(this, "`;")], !1)))).apply(void 0, n)
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+        },
+        209: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.SubscriberStatusEnum = t.SubscriberEmailStatusEnum = t.PdfViewMode = t.AnnotationTypeEnum = t.AccreditationTypeEnum = t.SectionTypeEnum = void 0,
+            function(e) {
+                e[e.Sign = 0] = "Sign",
+                e[e.Annotation = 1] = "Annotation"
+            }(t.SectionTypeEnum || (t.SectionTypeEnum = {})),
+            function(e) {
+                e[e.Electronics = 0] = "Electronics",
+                e[e.ICP = 1] = "ICP",
+                e[e.Institutional = 2] = "Institutional"
+            }(t.AccreditationTypeEnum || (t.AccreditationTypeEnum = {})),
+            function(e) {
+                e[e.Nenhum = 0] = "Nenhum",
+                e[e.Postit = 1] = "Postit",
+                e[e.Highlight = 2] = "Highlight",
+                e[e.TextCap = 3] = "TextCap",
+                e[e.TextBaloon = 4] = "TextBaloon",
+                e[e.Image = 5] = "Image",
+                e[e.Stamp = 6] = "Stamp"
+            }(t.AnnotationTypeEnum || (t.AnnotationTypeEnum = {})),
+            function(e) {
+                e[e.viewDocuments = 0] = "viewDocuments",
+                e[e.signDocuments = 1] = "signDocuments",
+                e[e.markDocuments = 2] = "markDocuments"
+            }(t.PdfViewMode || (t.PdfViewMode = {})),
+            function(e) {
+                e[e.None = 0] = "None",
+                e[e.Delivered = 1] = "Delivered",
+                e[e.Open = 2] = "Open",
+                e[e.Click = 3] = "Click"
+            }(t.SubscriberEmailStatusEnum || (t.SubscriberEmailStatusEnum = {})),
+            function(e) {
+                e[e.Pending = 0] = "Pending",
+                e[e.Rejected = 1] = "Rejected",
+                e[e.Signed = 2] = "Signed",
+                e[e.Error = 3] = "Error"
+            }(t.SubscriberStatusEnum || (t.SubscriberStatusEnum = {}))
+        },
+        210: function(e, t, i) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.ColorGenerator = void 0;
+            var n = i(150)
+              , a = function() {
+                function e(t) {
+                    this.notIncludeColorsRGB = t.map((function(t) {
+                        return e.hexToRgb(t)
+                    }
+                    ))
+                }
+                return e.hexToRgb = function(e) {
+                    return (e = e.replace("#", "")).match(new RegExp("(.{" + e.length / 3 + "})","g")).map((function(t) {
+                        return parseInt(e.length % 2 ? t + t : t, 16)
+                    }
+                    ))
+                }
+                ,
+                e.rgbToHex = function(e, t, i) {
+                    return "#" + [e, t, i].map((function(e) {
+                        return e.toString(16).padStart(2, "0")
+                    }
+                    )).join("")
+                }
+                ,
+                e.prototype.generateRandomColor = function() {
+                    var t = this
+                      , i = [n.Utils.getRandomInt(1, 255), n.Utils.getRandomInt(1, 255), n.Utils.getRandomInt(1, 255)]
+                      , a = i[0]
+                      , o = i[1]
+                      , r = i[2]
+                      , s = e.rgbToHex(a, o, r)
+                      , c = function(e) {
+                        for (var i = !1, n = 0; n < t.notIncludeColorsRGB.length; n++) {
+                            var a = t.notIncludeColorsRGB[n];
+                            if (t.verifyRangeColorVariation(a, e)) {
+                                i = !0;
+                                break
+                            }
+                        }
+                        return i
+                    };
+                    if (c(i)) {
+                        var l = i[1]
+                          , d = i[2]
+                          , u = function(i) {
+                            var a = e.maxVariationHexa * e.numberVariationsRange
+                              , o = function(e) {
+                                var i = t.variationBitRangeColorPositive(e);
+                                return i < 255 ? i + 1 : i
+                            }(i)
+                              , r = function(e) {
+                                var i = t.variationBitRangeColorNegative(e);
+                                return i > 0 ? i - 1 : i
+                            }(i);
+                            return i > 255 - a ? r : i < 0 + a ? o : [o, r][n.Utils.getRandomInt(0, 1)]
+                        };
+                        return c([u(i[0]), u(l), u(d)]) ? this.generateRandomColor() : (this.notIncludeColorsRGB.push(i),
+                        s)
+                    }
+                    return this.notIncludeColorsRGB.push(i),
+                    s
+                }
+                ,
+                e.prototype.variationBitRangeColorPositive = function(t) {
+                    var i = t + e.maxVariationHexa * e.numberVariationsRange;
+                    return i > 255 ? 255 : i
+                }
+                ,
+                e.prototype.variationBitRangeColorNegative = function(t) {
+                    var i = t - e.maxVariationHexa * e.numberVariationsRange;
+                    return i < 0 ? 0 : i
+                }
+                ,
+                e.prototype.verifyRangeColorVariation = function(e, t) {
+                    var i = e[0]
+                      , n = e[1]
+                      , a = e[2]
+                      , o = t[0]
+                      , r = t[1]
+                      , s = t[2]
+                      , c = !1
+                      , l = !1
+                      , d = !1;
+                    return this.variationBitRangeColorNegative(i) < o && o < this.variationBitRangeColorPositive(i) && (c = !0),
+                    this.variationBitRangeColorNegative(n) < r && r < this.variationBitRangeColorPositive(n) && (l = !0),
+                    this.variationBitRangeColorNegative(a) < s && s < this.variationBitRangeColorPositive(a) && (d = !0),
+                    100 * [c, l, d].filter((function(e) {
+                        return !!e
+                    }
+                    )).length / 3 > 50
+                }
+                ,
+                e.maxVariationHexa = 16,
+                e.numberVariationsRange = 2,
+                e
+            }();
+            t.ColorGenerator = a
+        },
+        231: function(e, t) {},
+        287: function(e, t, i) {
+            "use strict";
+            var n = this && this.__assign || function() {
+                return (n = Object.assign || function(e) {
+                    for (var t, i = 1, n = arguments.length; i < n; i++)
+                        for (var a in t = arguments[i])
+                            Object.prototype.hasOwnProperty.call(t, a) && (e[a] = t[a]);
+                    return e
+                }
+                ).apply(this, arguments)
+            }
+              , a = this && this.__awaiter || function(e, t, i, n) {
+                return new (i || (i = Promise))((function(a, o) {
+                    function r(e) {
+                        try {
+                            c(n.next(e))
+                        } catch (e) {
+                            o(e)
+                        }
+                    }
+                    function s(e) {
+                        try {
+                            c(n.throw(e))
+                        } catch (e) {
+                            o(e)
+                        }
+                    }
+                    function c(e) {
+                        var t;
+                        e.done ? a(e.value) : (t = e.value,
+                        t instanceof i ? t : new i((function(e) {
+                            e(t)
+                        }
+                        ))).then(r, s)
+                    }
+                    c((n = n.apply(e, t || [])).next())
+                }
+                ))
+            }
+              , o = this && this.__generator || function(e, t) {
+                var i, n, a, o, r = {
+                    label: 0,
+                    sent: function() {
+                        if (1 & a[0])
+                            throw a[1];
+                        return a[1]
+                    },
+                    trys: [],
+                    ops: []
+                };
+                return o = {
+                    next: s(0),
+                    throw: s(1),
+                    return: s(2)
+                },
+                "function" == typeof Symbol && (o[Symbol.iterator] = function() {
+                    return this
+                }
+                ),
+                o;
+                function s(o) {
+                    return function(s) {
+                        return function(o) {
+                            if (i)
+                                throw new TypeError("Generator is already executing.");
+                            for (; r; )
+                                try {
+                                    if (i = 1,
+                                    n && (a = 2 & o[0] ? n.return : o[0] ? n.throw || ((a = n.return) && a.call(n),
+                                    0) : n.next) && !(a = a.call(n, o[1])).done)
+                                        return a;
+                                    switch (n = 0,
+                                    a && (o = [2 & o[0], a.value]),
+                                    o[0]) {
+                                    case 0:
+                                    case 1:
+                                        a = o;
+                                        break;
+                                    case 4:
+                                        return r.label++,
+                                        {
+                                            value: o[1],
+                                            done: !1
+                                        };
+                                    case 5:
+                                        r.label++,
+                                        n = o[1],
+                                        o = [0];
+                                        continue;
+                                    case 7:
+                                        o = r.ops.pop(),
+                                        r.trys.pop();
+                                        continue;
+                                    default:
+                                        if (!(a = r.trys,
+                                        (a = a.length > 0 && a[a.length - 1]) || 6 !== o[0] && 2 !== o[0])) {
+                                            r = 0;
+                                            continue
+                                        }
+                                        if (3 === o[0] && (!a || o[1] > a[0] && o[1] < a[3])) {
+                                            r.label = o[1];
+                                            break
+                                        }
+                                        if (6 === o[0] && r.label < a[1]) {
+                                            r.label = a[1],
+                                            a = o;
+                                            break
+                                        }
+                                        if (a && r.label < a[2]) {
+                                            r.label = a[2],
+                                            r.ops.push(o);
+                                            break
+                                        }
+                                        a[2] && r.ops.pop(),
+                                        r.trys.pop();
+                                        continue
+                                    }
+                                    o = t.call(e, r)
+                                } catch (e) {
+                                    o = [6, e],
+                                    n = 0
+                                } finally {
+                                    i = a = 0
+                                }
+                            if (5 & o[0])
+                                throw o[1];
+                            return {
+                                value: o[0] ? o[1] : void 0,
+                                done: !0
+                            }
+                        }([o, s])
+                    }
+                }
+            }
+            ;
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            }),
+            t.ViewerPdf = void 0;
+            i(164);
+            var r = i(288)
+              , s = i(292)
+              , c = i(298)
+              , l = i(158)
+              , d = i(162)
+              , u = i(209)
+              , b = i(150)
+              , f = i(210);
+            s.GlobalWorkerOptions.workerSrc = b.Utils.getCdnUrlScript() + "/lib/pdfjs/pdf.worker.js";
+            var h = function() {
+                function e(e) {
+                    if (this.PDFJSViewer = s,
+                    this.numberOfPages = 0,
+                    this.pagesRendered = 0,
+                    this.fabricObjects = [],
+                    this.activeCanvas = 0,
+                    this.scale = 1.31,
+                    this.pdfObj = null,
+                    this.docInfo = [],
+                    this.storageObj = null,
+                    this.base64 = null,
+                    this.base64Rubric = null,
+                    this.nameValSign = "",
+                    this.nameValRubric = "",
+                    this.marksFilterSignatures = !0,
+                    this.marksFilterRubrics = !0,
+                    this.isDocSign = !1,
+                    this.options = e,
+                    this.initTranslate(e.culture),
+                    this.objFileList = this.fileList,
+                    0 == this.fileList.length)
+                        throw new Error(this.translate("notDocSent"));
+                    this.objBind && this.objBind.length > 0 ? this.signObject(JSON.stringify(this.objBind)) : this.signObject(""),
+                    this.docName = this.fileList[0].fileName,
+                    this.initToastr(),
+                    this.renderContainerToolbar(),
+                    this.renderMenuDocs(this.objFileList),
+                    this.renderSubscribersList(this.subscribersList),
+                    this.loadDocument(this.fileList[0].tempPath, this.docName, 0),
+                    this.initButtonsSignatureNavigate(),
+                    this.initSubscribersButtons()
+                }
+                return Object.defineProperty(e.prototype, "containerId", {
+                    get: function() {
+                        return this.options.containerId
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "viewMode", {
+                    get: function() {
+                        return this.options.viewMode && "number" == typeof this.options.viewMode ? this.options.viewMode : u.PdfViewMode.viewDocuments
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "callback", {
+                    get: function() {
+                        if ("function" != typeof this.options.callback)
+                            throw $(".loading").css("display", "none"),
+                            new Error(this.translate("callbackMustBeFunction"));
+                        return this.options.callback
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "fileList", {
+                    get: function() {
+                        return this.options.fileList
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "objBind", {
+                    get: function() {
+                        return this.options.objBind
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "subscriberName", {
+                    get: function() {
+                        return this.options.subscriberName ? this.options.subscriberName : ""
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "subscribersList", {
+                    get: function() {
+                        return this.options.subscribersList
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "IsEletronicSign", {
+                    get: function() {
+                        return this.options.accreditationType === u.AccreditationTypeEnum.Electronics
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "HasCertificates", {
+                    get: function() {
+                        return !this.IsEletronicSign && this.options.certificates && this.options.certificates.length > 0
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                Object.defineProperty(e.prototype, "DownloadVisibility", {
+                    get: function() {
+                        return void 0 === this.options.downloadButton && null === this.options.downloadButton || this.options.downloadButton
+                    },
+                    enumerable: !1,
+                    configurable: !0
+                }),
+                e.prototype.initButtonsSignatureNavigate = function() {
+                    var e = this;
+                    this.viewMode === u.PdfViewMode.signDocuments && (this.marksFilterSignatures && $("#marksFilterSignatures").attr("checked", "checked"),
+                    this.marksFilterRubrics && $("#marksFilterRubrics").attr("checked", "checked"),
+                    $("#marksFilterSignatures").on("change", (function() {
+                        e.marksFilterSignatures = !e.marksFilterSignatures,
+                        e.currentMarkFocus = void 0
+                    }
+                    )),
+                    $("#marksFilterRubrics").on("change", (function() {
+                        e.marksFilterRubrics = !e.marksFilterRubrics,
+                        e.currentMarkFocus = void 0
+                    }
+                    )),
+                    $("#btnPrevSignature").on("click", (function() {
+                        e.goToPrevSignature()
+                    }
+                    )),
+                    $("#btnNextSignature").on("click", (function() {
+                        e.goToNextSignature()
+                    }
+                    )))
+                }
+                ,
+                e.prototype.initToastr = function() {
+                    d.options.closeButton = !0,
+                    d.options.debug = !1,
+                    d.options.newestOnTop = !1,
+                    d.options.progressBar = !0,
+                    d.options.positionClass = "toast-top-right",
+                    d.options.preventDuplicates = !0,
+                    d.options.onclick = null,
+                    d.options.showDuration = 300,
+                    d.options.hideDuration = 1e3,
+                    d.options.timeOut = 5e3,
+                    d.options.extendedTimeOut = 1e3,
+                    d.options.showEasing = "swing",
+                    d.options.hideEasing = "linear"
+                }
+                ,
+                e.prototype.initTranslate = function(e) {
+                    this.objTranslate = l.Translate.getInstance(),
+                    this.objTranslate.Lang = e
+                }
+                ,
+                e.prototype.initSubscribersButtons = function() {
+                    var e = this;
+                    $("#bt-subscribersSignature").click((function() {
+                        e.showSubscribersListSignature()
+                    }
+                    )),
+                    $("#bt-subscribersRubric").click((function() {
+                        e.showSubscribersListRubric()
+                    }
+                    ))
+                }
+                ,
+                e.prototype.translate = function(e) {
+                    return this.objTranslate.translate(e)
+                }
+                ,
+                e.prototype.translateView = function() {
+                    var e = this;
+                    $("#page").html(this.translate("page")),
+                    $("#of").html(this.translate("of")),
+                    $("#close").html(this.translate("close")),
+                    $("#save").html(this.translate("save")),
+                    $("#signatureLocation").html(this.translate("signatureLocation")),
+                    $("#chooseYourSignature").html(this.translate("chooseYourSignature")),
+                    $("#whatNameSignature").html(this.translate("whatNameSignature")),
+                    $("#generateSignature").html(this.translate("generateSignature")),
+                    $("#chooseSignatureUsed").html(this.translate("chooseSignatureUsed")),
+                    $("#clickUsedSignature").html(this.translate("clickUsedSignature")),
+                    $("#chooseYourCertificate").html(this.translate("chooseYourCertificate")),
+                    $("#whatNameRubric").html(this.translate("whatNameRubric")),
+                    $("#generateRubric").html(this.translate("generateRubric")),
+                    $("#chooseRubricUsed").html(this.translate("chooseRubricUsed")),
+                    $("#clickUsedRubric").html(this.translate("clickUsedRubric")),
+                    $("#btnPrevSignature").attr("title", this.translate("previousAppointment")),
+                    $("#btnNextSignature").attr("title", this.translate("nextAppointment")),
+                    $("#btnPrevSignature").html(this.translate("previous")),
+                    $("#btnNextSignature").html(this.translate("next")),
+                    $("#bt-subscribersSignature").html(this.translate("signature")),
+                    $("#bt-subscribersRubric").html(this.translate("rubric")),
+                    $("#labelMarksFilterSignatures").append(this.translate("signature")),
+                    $("#labelMarksFilterRubrics").append(this.translate("rubric")),
+                    $("#progressText span:eq(0)").text(this.translate("wereCompleted")),
+                    $("#progressText span:eq(2)").text(this.translate("of")),
+                    $("#progressText span:eq(4)").text(this.translate("signatures")),
+                    $(".translatable-button").each((function(t, i) {
+                        var n = $(i).data("translate-key");
+                        $(i).attr("title", e.translate(n))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.renderContainerToolbar = function() {
+                    var e = '<div class="toolbar-default">\r\n    <div class="toolbar-conteiner ">\r\n        <div id="callOutDocs" class="callOutDocs"></div>\r\n        \x3c!-- Button Menu --\x3e\r\n        <div class="grey-bar radius--5 shadow--low">\r\n            <button type="button" id="" class="button--icon button-toggle translatable-button" data-translate-key="menu" style="position: relative;" role="button" title="Lista de documentos">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-menuline icon--22"></i>\r\n                </span>\r\n            </button>\r\n            <div class="menu__document shadow--medium simplebar-content">\r\n\r\n            </div>\r\n        </div>\r\n        \x3c!-- Button zoomIn  --\x3e\r\n        <div class="grey-bar greybar--after radius--5 shadow--low">\r\n            <button type="button" class="button--icon zoomIn translatable-button" data-translate-key="zoomIn" role="button" title="Aumentar Zoom">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-zoomIn icon--22 "></i>\r\n                </span>\r\n            </button>\r\n         \x3c!-- Button zoomOut  --\x3e\r\n            <button type="button" class="button--icon zoomOut translatable-button" data-translate-key="zoomOut" role="button" title="Diminuir Zoom">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-zoomOut icon--22 "></i>\r\n                </span>\r\n            </button>\r\n        </div>\r\n        \x3c!-- Button downloadDoc  --\x3e\r\n        <div class="grey-bar greybar--after radius--5 shadow--low">\r\n            <button type="button" class="button--icon downloadDoc" role="button" title="Download">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-download icon--22 "></i>\r\n                </span>\r\n            </button>\r\n        </div>\r\n\r\n        <div class="grey-bar greybar--after radius--5 shadow--low">\r\n            <div class="tool tooglePages"><label id="page" for="" class="font-size--14 margin--0">página</label> <input class="input--small inputPageChange" type="text" value="1" />\r\n                <label id="of" for="" class="font-size--14 margin--0">de</label> <label for="" class="font-size--14 margin--0 inputPageChange--media">/</label> &nbsp;\r\n                <span></span>&nbsp;\r\n            </div>\r\n            \x3c!-- Button pageUp  --\x3e\r\n            <button type="button" class="button--icon pageUp translatable-button" data-translate-key="pageUp" role="button" title="Página anterior">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-arrowTracedUp icon--16"></i>\r\n                </span>\r\n            </button>\r\n            \x3c!-- Button pageDown  --\x3e\r\n            <button type="button" class="button--icon pageDown translatable-button" data-translate-key="pageDown" role="button" title="Página seguinte">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-arrowTracedDown icon--16"></i>\r\n                </span>\r\n            </button>\r\n        </div>\r\n\r\n        <div class="grey-bar radius--5 shadow--low signButtons">\r\n            \x3c!-- Button local de assinatura  --\x3e\r\n            <button type="button" id="" class="button--icon button-toggle translatable-button" data-translate-key="signLocation" role="button" title="Definir local de assinatura">\r\n                <span class="icon-square--toolbar  inactive w-auto">\r\n                    <i class="glyph ab-sign icon--22 margin-r--10"></i> <label id="signatureLocation" class="font-size--14 margin--0">Definir local de assinatura</label>\r\n                </span>\r\n            </button>\r\n            <div class="subscribers__list shadow--medium simplebar-content">\r\n                <div class="container--signature-rubric">\r\n                    <button class="button--action button-signature" id="bt-subscribersSignature" >Assinatura</button>\r\n                    <button class="button--action button-rubric" id="bt-subscribersRubric" >Rubrica</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class="grey-bar radius--5 shadow--low signButtons">\r\n            \x3c!-- Button excluir marcação selecionada  --\x3e\r\n            <button type="button" id="" class="button--icon deleteSelected translatable-button" data-translate-key="deleteSelected" role="button">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-close icon--22 "></i>\r\n                </span>\r\n            </button>\r\n            \x3c!-- Button deletar todas as marcações  --\x3e\r\n            <button type="button" id="" class="button--icon clearActivePage translatable-button" data-translate-key="clearActivePage" role="button">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-delete icon--22 "></i>\r\n                </span>\r\n            </button>\r\n\r\n        </div>\r\n        \x3c!-- Button fullscreen  --\x3e\r\n        <div class="grey-bar radius--5 shadow--low fullscreenButtons">\r\n            <button type="button" id="" class="button--icon bt-fullscreen translatable-button" data-translate-key="fullscreen" role="button" title="Tela cheia">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-fullscreen icon--22"></i>\r\n                </span>\r\n            </button>\r\n            \x3c!-- Button fullscreenOff  --\x3e\r\n            <button type="button" id="" class="button--icon bt-fullscreenOff translatable-button" data-translate-key="fullscreenOff" role="button" title="Sair da tela cheia">\r\n                <span class="icon-square--toolbar  inactive">\r\n                    <i class="glyph ab-fullscreenOff icon--22"></i>\r\n                </span>\r\n            </button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class="toolbar-conteiner toolbar-previous-next">\r\n    <div class="container-previous">\r\n        <button id="btnPrevSignature" class="button--action button--thin">Anterior</button>\r\n    </div>\r\n\r\n    <div class="input-wrap container-marks-filter">\r\n        <div class="input-content input-content--checkbox">\r\n            <div class="input input--checkbox">\r\n                <label class="container--checkbox" id="labelMarksFilterSignatures" >\r\n                    <input id="marksFilterSignatures" type="checkbox" name="marksFilterSignatures" >\r\n                    <span class="checkbox"></span>\r\n                </label>\r\n            </div>\r\n            <div class="input input--checkbox">\r\n                <label class="container--checkbox" id="labelMarksFilterRubrics" >\r\n                    <input id="marksFilterRubrics" type="checkbox" name="marksFilterRubrics" >\r\n                    <span class="checkbox"></span>\r\n                </label>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class="container-next">\r\n        <button id="btnNextSignature" class="button--action button--thin">Próxima</button>\r\n    </div>\r\n</div>\r\n<div class="toolbar-sign-progress">\r\n    <div style="width: 330px; margin: 0 auto; text-align: center;">\r\n        <div id="progressText"><span>Foram concluídas</span> <span id="signedCount"></span> <span>de</span> <span id="signedTotal"></span> <span>assinaturas</span></div>\r\n        <div class="progress">\r\n            <div id="signProgress" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class="pdf-container"></div>\r\n\x3c!-- Loading --\x3e\r\n<div class="loading" style="display: none;">Loading&#8230;</div>\r\n\x3c!-- Modal assinatura --\x3e\r\n<div id="${idContainer}ModalViewer" class="modal abl-modal abl-modal-viewer" tabindex="-1" role="dialog">\r\n    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">\r\n        <div class="modal-content shadow--very-hard">\r\n            <div class="modal-header">\r\n                <div class="modal-title"><b id="chooseYourSignature">Escolha sua assinatura</b></div>\r\n                <button id="CloseModalIcone" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">\r\n                    <span aria-hidden="true">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class="modal-body" style="padding-bottom: 15px;">\r\n                <form id="form${idContainer}">\r\n                    <div class="input-wrap certificates">\r\n                        <label id="chooseYourCertificate" class="form-label">* Qual certificado irá utilizar para assinar?</label>\r\n                        <div id="certificates-list-${idContainer}" class="list-simple">\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class="input-wrap sign-digital">\r\n                        <label class="form-label" for="name" id="whatNameSignature">* Qual o nome para sua assinatura</label>\r\n                        <div class="input-content input-content--text">\r\n                            <input type="text" class="input input--text InputSignName" maxlength="100" value="${subscriberName}" />\r\n                            <span class="countName">${subscriberName.length} /100</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class="button-conteiner sign-digital">\r\n                        <button id="generateSignature" class="button button--positive BtSignGenerate" type="button">\r\n                            Gerar Assinatura\r\n                        </button>\r\n                    </div>\r\n\r\n                    <div class="radio-container" style="display: none">\r\n                        <div class="input-wrap">\r\n                            <label class="form-label" id="chooseSignatureUsed">* Escolha abaixo a assinatura que será utilizada em todo o documento:</label>\r\n                            <div class="input-content input-content--radio">\r\n                                <div class="input--radio" style="line-height: 1;">\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseSign${idContainer}" value="1">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-sign--1 image"></span>\r\n                                    </label>\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseSign${idContainer}" value="2">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-sign--2 image"></span>\r\n                                    </label>\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseSign${idContainer}" value="3">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-sign--3 image"></span>\r\n                                    </label>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n                <div class="input-wrap canvas-clone-container">\r\n                    <div>\r\n                        <p class="signature__p" id="clickUsedSignature">Clique em Ok para utilizar a assinatura escolhida:</p>\r\n                        <span id="CanvasSignClone${idContainer}" class="canvas-clone image" style="white-space: nowrap"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class="modal-footer button-conteiner">\r\n                <button type="button" class="button button--ghost" data-dismiss="modal" id="close">Fechar</button>\r\n                <button type="button" class="button button--positive BtModalSalvarSign" id="save">Salvar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\x3c!-- Modal rubrica --\x3e\r\n<div id="${idContainer}ModalViewerRubric" class="modal abl-modal abl-modal-viewer" tabindex="-1" role="dialog">\r\n    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">\r\n        <div class="modal-content shadow--very-hard">\r\n            <div class="modal-header">\r\n                <div class="modal-title"><b id="chooseYourRubric">Escolha sua rubrica</b></div>\r\n                <button id="CloseModalIcone" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">\r\n                    <span aria-hidden="true">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class="modal-body" style="padding-bottom: 15px;">\r\n                <form id="form${idContainer}Rubric">                    \r\n                    <div class="input-wrap rubric-digital">\r\n                        <label class="form-label" for="name" id="whatNameRubric">* Qual o nome para sua rubrica?</label>\r\n                        <div class="input-content input-content--text">\r\n                            <input type="text" class="input input--text InputRubricName" maxlength="100" value="${subscriberName}" />\r\n                            <span class="countName">${subscriberName.length}</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class="button-conteiner rubric-digital">\r\n                        <button id="generateRubric" class="button button--positive BtRubricGenerate" type="button">\r\n                            Gerar Rubrica\r\n                        </button>\r\n                    </div>\r\n\r\n                    <div class="radio-container" style="display: none">\r\n                        <div class="input-wrap">\r\n                            <label class="form-label" id="chooseRubric">* Escolha abaixo a rubrica que será utilizada em todo o documento:</label>\r\n                            <div class="input-content input-content--radio">\r\n                                <div class="input--radio" style="line-height: 1;">\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseRubric${idContainer}" value="1">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-rubric--1 image"></span>\r\n                                    </label>\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseRubric${idContainer}" value="2">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-rubric--2 image"></span>\r\n                                    </label>\r\n                                    <label class="container--radio">\r\n                                        <input type="radio" name="choseRubric${idContainer}" value="3">\r\n                                        <span class="checkmark--radio"></span>\r\n                                        <span class="canvas-rubric--3 image"></span>\r\n                                    </label>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n                <div class="input-wrap canvas-clone-container">\r\n                    <div>\r\n                        <p class="Rubric__p" id="clickUsedRubric">Clique em Ok para utilizar a rubrica escolhida:</p>\r\n                        <span id="CanvasRubricClone${idContainer}" class="canvas-clone image" style="white-space: nowrap"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class="modal-footer button-conteiner">\r\n                <button type="button" class="button button--ghost" data-dismiss="modal" id="close">Fechar</button>\r\n                <button type="button" class="button button--positive BtModalSalvarRubric" id="save">Salvar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n'.interpolate({
+                        idContainer: this.containerId,
+                        subscriberName: this.subscriberName
+                    });
+                    $("#" + this.containerId).append(e.toString()),
+                    this.handleToolsToolbar()
+                }
+                ,
+                e.prototype.renderMenuDocs = function(e) {
+                    var t = this;
+                    $.each(e, (function(e, i) {
+                        var n = i.fileName
+                          , a = i.tempPath
+                          , o = '<a class="menu--icon menu__content btListDoc '.concat(0 == e ? "active" : "", '" title="').concat(n, '" data-path="').concat(a, '">\n\t\t\t\t\t\t\t\t<i class="glyph ab-doc"></i>\n\t\t\t\t\t\t\t\t<p class="menu__p">').concat(n, "</p>\n\t\t\t\t\t\t\t</a>");
+                        $("#" + t.containerId).find(".menu__document").append(o)
+                    }
+                    )),
+                    this.handleClickBtListDoc()
+                }
+                ,
+                e.prototype.handleClickBtListDoc = function() {
+                    var e = this;
+                    $("#" + this.containerId).find(".menu__document a").click((function() {
+                        $("#" + e.containerId).find(".menu__document a").removeClass("active");
+                        var t = $(this).data("path");
+                        e.loadDocument(t, $(this).attr("title"), $(this).index()),
+                        $("#" + e.containerId).find(".menu__document a").removeClass("active"),
+                        $(this).addClass("active")
+                    }
+                    )),
+                    $("#" + this.containerId + " .menu__document a:first").addClass("active")
+                }
+                ,
+                e.prototype.renderSubscribersList = function(e) {
+                    return a(this, void 0, void 0, (function() {
+                        var t, i, n, a;
+                        return o(this, (function(o) {
+                            return t = this,
+                            i = ["#ffffff", "#c2c3c8", "#000000"],
+                            n = new f.ColorGenerator(i),
+                            a = [],
+                            $.each(e, (function(e, i) {
+                                var o = i.id
+                                  , r = i.name
+                                  , s = i.email
+                                  , c = n.generateRandomColor();
+                                a.push(c);
+                                var l = '\n\t\t\t\t<a class="menu--icon menu__content randomColors btListDoc subscribers__list_signature" id="subscribers__signature__list__item__'.concat(o, '" title="').concat(r, " - ").concat(s, " - ").concat(t.translate("signatureNotChecked"), '" >\n\t\t\t\t\t<span id="subscribers__signature__list__item__').concat(o, '__icon__" >\n\t\t\t\t\t\t<i class="glyph ab-sign"></i>\n\t\t\t\t\t</span>\n\t\t\t\t\t<p class="menu__p">').concat(r, "</p>\n\t\t\t\t</a>\n\t\t\t");
+                                $("#" + t.containerId).find(".subscribers__list").append(l);
+                                var u = $("#" + t.containerId).find("a[id='subscribers__signature__list__item__".concat(o, "']"));
+                                t.defineColor(u, c),
+                                u.click((function() {
+                                    var e = !1;
+                                    if (t.storageObj = sessionStorage.getItem("ObjSign"),
+                                    t.storageObj && JSON.parse(t.storageObj).forEach((function(i, n) {
+                                        if (t.docIndex == n) {
+                                            var a = i.section;
+                                            a && a.length > 0 && a.forEach((function(i, n) {
+                                                t.IsEletronicSign || (null == i ? void 0 : i.isRubric) || i.idSubscriber !== o || (e = !0)
+                                            }
+                                            ))
+                                        }
+                                    }
+                                    )),
+                                    e)
+                                        d.warning(t.translate("certificateLimitReached"));
+                                    else {
+                                        var i = {
+                                            idSubscriber: o,
+                                            name: r,
+                                            color: c,
+                                            isRubric: !1
+                                        };
+                                        t.createRect(null, !0, i)
+                                    }
+                                    u.css("pointer-events", "none"),
+                                    setTimeout((function() {
+                                        u.css("pointer-events", "auto")
+                                    }
+                                    ), 300)
+                                }
+                                ));
+                                var b = '\n\t\t\t\t<a class="menu--icon menu__content randomColors btListDoc subscribers__list_rubric" id="subscribers__rubric__list__item__'.concat(o, '" title="').concat(r, " - ").concat(s, " - ").concat(t.translate("rubricNotChecked"), '" >\n\t\t\t\t\t<span id="subscribers__rubric__list__item__').concat(o, '__icon__" >\n\t\t\t\t\t\t<i class="glyph ab-sign"></i>\n\t\t\t\t\t</span>\n\t\t\t\t\t<p class="menu__p">').concat(r, "</p>\n\t\t\t\t</a>\n\t\t\t");
+                                $("#" + t.containerId).find(".subscribers__list").append(b);
+                                var f = $("#" + t.containerId).find("a[id='subscribers__rubric__list__item__".concat(o, "']"));
+                                t.defineColor(f, c),
+                                f.click((function() {
+                                    var e = {
+                                        idSubscriber: o,
+                                        name: r,
+                                        color: c,
+                                        isRubric: !0
+                                    };
+                                    t.createRect(null, !0, e)
+                                }
+                                ))
+                            }
+                            )),
+                            this.showSubscribersListSignature(),
+                            [2]
+                        }
+                        ))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.verifySectionsUpdateSubscribersListStatus = function() {
+                    var e = this;
+                    if (this.viewMode !== u.PdfViewMode.markDocuments || !this.docInfo)
+                        return null;
+                    this.subscribersList.forEach((function(t) {
+                        var i, n, a = (null === (i = e.docInfo[e.docIndex]) || void 0 === i ? void 0 : i.section.filter((function(e) {
+                            return !e.isRubric && t.id === e.idSubscriber
+                        }
+                        )).length) > 0, o = (null === (n = e.docInfo[e.docIndex]) || void 0 === n ? void 0 : n.section.filter((function(e) {
+                            return e.isRubric && t.id === e.idSubscriber
+                        }
+                        )).length) > 0, r = $("#" + e.containerId).find(".subscribers__list"), s = r.find("span[id='subscribers__signature__list__item__".concat(t.id, "__icon__']"));
+                        a ? (r.find("a[id='subscribers__signature__list__item__".concat(t.id, "']")).attr("title", "".concat(t.name, " - ").concat(t.email, " - ").concat(e.translate("signatureAlreadyChecked"))),
+                        s.html('<i class="glyph ab-confirm"></i>')) : (r.find("a[id='subscribers__signature__list__item__".concat(t.id, "']")).attr("title", "".concat(t.name, " - ").concat(t.email, " - ").concat(e.translate("signatureNotChecked"))),
+                        s.html('<i class="glyph ab-sign"></i>'));
+                        var c = $("#" + e.containerId).find(".subscribers__list")
+                          , l = c.find("span[id='subscribers__rubric__list__item__".concat(t.id, "__icon__']"));
+                        o ? (c.find("a[id='subscribers__rubric__list__item__".concat(t.id, "']")).attr("title", "".concat(t.name, " - ").concat(t.email, " - ").concat(e.translate("rubricAlreadyChecked"))),
+                        l.html('<i class="glyph ab-confirm"></i>')) : (c.find("a[id='subscribers__rubric__list__item__".concat(t.id, "']")).attr("title", "".concat(t.name, " - ").concat(t.email, " - ").concat(e.translate("rubricNotChecked"))),
+                        l.html('<i class="glyph ab-sign"></i>'))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.showSubscribersListSignature = function() {
+                    $("#bt-subscribersSignature").prop("disabled", !0),
+                    $("#bt-subscribersRubric").prop("disabled", !1),
+                    $(".subscribers__list_signature").show(),
+                    $(".subscribers__list_rubric").hide()
+                }
+                ,
+                e.prototype.showSubscribersListRubric = function() {
+                    $("#bt-subscribersSignature").prop("disabled", !1),
+                    $("#bt-subscribersRubric").prop("disabled", !0),
+                    $(".subscribers__list_signature").hide(),
+                    $(".subscribers__list_rubric").show()
+                }
+                ,
+                e.prototype.defineColor = function(e, t) {
+                    e.attr("data-color", t),
+                    e.css("border-left-color", t),
+                    $(".randomColors").mouseover((function() {
+                        $(this).css("background-color", $(this).attr("data-color"))
+                    }
+                    )),
+                    $(".randomColors").mouseout((function() {
+                        $(this).css("background-color", "transparent")
+                    }
+                    ))
+                }
+                ,
+                e.prototype.handleDisplayButtons = function() {
+                    this.viewMode !== u.PdfViewMode.viewDocuments && this.viewMode !== u.PdfViewMode.signDocuments || $("#" + this.containerId).find(".signButtons").remove(),
+                    this.viewMode !== u.PdfViewMode.signDocuments && this.viewMode !== u.PdfViewMode.markDocuments || $("#" + this.containerId).find(".printDoc").remove(),
+                    this.viewMode === u.PdfViewMode.markDocuments && $("#" + this.containerId).find(".fullscreenButtons").remove(),
+                    this.DownloadVisibility || $("#" + this.containerId).find(".downloadDoc").remove(),
+                    this.viewMode !== u.PdfViewMode.signDocuments && ($(".toolbar-previous-next").remove(),
+                    $("#callOutDocs").remove(),
+                    $(".toolbar-sign-progress").remove())
+                }
+                ,
+                e.prototype.handleToolsToolbar = function() {
+                    var e = this;
+                    this.handleDisplayButtons(),
+                    $("#" + this.containerId).find(".zoomIn").click((function() {
+                        e.zoomDoc("in")
+                    }
+                    )),
+                    $("#" + this.containerId).find(".zoomOut").click((function() {
+                        e.zoomDoc("out")
+                    }
+                    ));
+                    $("#" + this.containerId).find(".downloadDoc").click((function() {
+                        e.download(e.url, e.docName)
+                    }
+                    )),
+                    $("#" + this.containerId).find(".deleteSelected").click((function() {
+                        e.deleteSelectedObject()
+                    }
+                    )),
+                    $("#" + this.containerId).find(".clearActivePage").click((function() {
+                        e.clearActivePage()
+                    }
+                    )),
+                    $("#" + this.containerId).find(".serialize").click((function() {
+                        e.serializePdf()
+                    }
+                    )),
+                    $("#" + this.containerId).find(".pageUp").click((function() {
+                        if (e.numberOfPages > 1) {
+                            var t = Number($(".inputPageChange").val().toString()) - 1;
+                            t >= 1 && ($(".inputPageChange").val(t),
+                            $(".inputPageChange").trigger("keyup"))
+                        }
+                    }
+                    )),
+                    $("#" + this.containerId).find(".pageDown").click((function() {
+                        if (e.numberOfPages > 1) {
+                            var t = Number($(".inputPageChange").val().toString()) + 1;
+                            t <= e.numberOfPages && ($(".inputPageChange").val(t),
+                            $(".inputPageChange").trigger("keyup"))
+                        }
+                    }
+                    ));
+                    var t = null;
+                    $("#" + this.containerId).find(".inputPageChange").keyup((function() {
+                        var i = $(this).val().toString();
+                        clearTimeout(t),
+                        t = setTimeout((function() {
+                            e.gotoPage(Number(i) - 1)
+                        }
+                        ), 500)
+                    }
+                    )),
+                    this.viewMode !== u.PdfViewMode.viewDocuments && (window.onbeforeunload = this.setBeforeUnload),
+                    $("#" + this.containerId).find(".pdf-container").on("scroll", (function() {
+                        if (e.numberOfPages > 1) {
+                            $(this).scrollTop();
+                            $("#" + e.containerId).find(".canvas-container").each((function(t, i) {
+                                var n = $(this).height() / 2 * -1;
+                                $(this).position().top < n && e.numberOfPages > $(this).index() + 1 && (e.activeCanvas = $(this).index() + 1,
+                                $(".inputPageChange").val($(this).index() + 2))
+                            }
+                            ));
+                            var t = $("#" + e.containerId).find(".canvas-container:eq(0)").height() / 2;
+                            $(this).scrollTop() < t && (e.activeCanvas = 0,
+                            $(".inputPageChange").val(1))
+                        } else
+                            e.activeCanvas = 0
+                    }
+                    )),
+                    $("#" + this.containerId).find(".bt-fullscreen").click((function() {
+                        $("#" + e.containerId).closest(".panel-body").addClass("fullscreen"),
+                        $(this).hide(),
+                        $("#" + e.containerId).find(".bt-fullscreenOff").show()
+                    }
+                    )),
+                    $("#" + this.containerId).find(".bt-fullscreenOff").click((function() {
+                        $("#" + e.containerId).closest(".panel-body").removeClass("fullscreen"),
+                        $(this).hide(),
+                        $("#" + e.containerId).find(".bt-fullscreen").show()
+                    }
+                    )),
+                    this.translateView()
+                }
+                ,
+                e.prototype.handleClickModalSign = function() {
+                    var e = this
+                      , t = this.fabricObjects[e.activeCanvas]
+                      , i = this.scale;
+                    $("#" + this.containerId + "ModalViewer").find(".BtModalSalvarSign").unbind("click").click((function() {
+                        var n = e.IsEletronicSign ? 225 * i : 266 * i
+                          , a = e.IsEletronicSign ? 30 * i : 86 * i
+                          , o = e.fabricObjects[e.activeCanvas].getActiveObject();
+                        if (!o || !e.fontSignName && e.IsEletronicSign)
+                            d.warning(e.translate("chooseSignature"));
+                        else {
+                            e.fabricObjects[e.activeCanvas].remove(o);
+                            var s = o.oCoords.bl.x + 20
+                              , c = o.oCoords.bl.y
+                              , l = e.IsEletronicSign ? "bottom" : "top"
+                              , b = e.IsEletronicSign ? e.fontSignSize * i : 10 * i
+                              , f = e.IsEletronicSign ? e.fontSignName : "Arial"
+                              , h = e.IsEletronicSign ? e.nameValSign : e.getCertInfoNormalize()
+                              , p = new r.fabric.Text(h,{
+                                fontSize: b,
+                                fontFamily: f,
+                                fontWeight: "normal",
+                                originX: "left",
+                                originY: l,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode === u.PdfViewMode.signDocuments,
+                                lockMovementY: e.viewMode === u.PdfViewMode.signDocuments,
+                                selectable: !1,
+                                hasControls: !1,
+                                top: e.IsEletronicSign ? 5 : -8,
+                                left: e.IsEletronicSign ? 20 * i : 0,
+                                data: o.data,
+                                hoverCursor: "default"
+                            })
+                              , g = new r.fabric.Rect({
+                                width: n,
+                                height: a,
+                                fill: "rgba(0, 152, 154, 0)",
+                                stroke: "rgba(0, 152, 154, 0)",
+                                top: 0,
+                                left: 0
+                            })
+                              , m = new r.fabric.Group([g, p],{
+                                left: e.IsEletronicSign ? s - 20 * i : s - 18 * i,
+                                top: e.IsEletronicSign ? c - 30 * i : c - 86.2 * i,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode !== u.PdfViewMode.markDocuments,
+                                lockMovementY: e.viewMode !== u.PdfViewMode.markDocuments,
+                                hasControls: !1,
+                                data: o.data
+                            })
+                              , v = o.data.isRubric ? "closeRubric" : "closeSign";
+                            $(e.fabricObjects[e.activeCanvas].lowerCanvasEl).closest(".canvas-container").append("<div class='" + v + "' data-indice='" + (o.data ? o.data : 0) + "' style='position:absolute; top: " + ((e.IsEletronicSign ? c : c - 60 * e.scale) - 23 * e.scale) + "px; left: " + (e.IsEletronicSign ? s - 25 * e.scale : s - 45 * e.scale) + "px; font-size: " + 16 * i + "px'><i class='glyph ab-delete'></i></div>"),
+                            e.handleClickEditSign();
+                            var S = new r.fabric.Text(h,{
+                                fontSize: e.IsEletronicSign ? e.fontSignSize : 10,
+                                fontFamily: f,
+                                fontWeight: "normal",
+                                originX: "left",
+                                originY: l,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode === u.PdfViewMode.signDocuments,
+                                lockMovementY: e.viewMode === u.PdfViewMode.signDocuments,
+                                selectable: !1,
+                                hasControls: !1,
+                                top: e.IsEletronicSign ? 5 : -8,
+                                left: 0,
+                                data: o.data,
+                                hoverCursor: "default"
+                            });
+                            t.add(m);
+                            var w = S.toDataURL({
+                                format: "png",
+                                multiplier: 3
+                            });
+                            e.base64 = w.replace("data:image/png;base64,", "");
+                            var y = e.serializePdf.bind(e)(o.data.index)
+                              , k = {
+                                pdfDocument: e.pdfObj,
+                                docInfoSerialize: y,
+                                base64Sign: e.base64,
+                                base64Rubric: e.base64Rubric,
+                                selectedCertificate: e.objSelectedCert
+                            };
+                            e.callback(k),
+                            e.signObject(y),
+                            $("#" + e.containerId + "ModalViewer").modal("hide")
+                        }
+                    }
+                    ))
+                }
+                ,
+                e.prototype.handleClickModalRubric = function() {
+                    var e = this
+                      , t = this.fabricObjects[e.activeCanvas]
+                      , i = this.scale;
+                    $("#" + this.containerId + "ModalViewerRubric").find(".BtModalSalvarRubric").unbind("click").click((function() {
+                        var n = 225 * i
+                          , a = 30 * i
+                          , o = e.fabricObjects[e.activeCanvas].getActiveObject();
+                        if (o && e.fontRubricName) {
+                            e.fabricObjects[e.activeCanvas].remove(o);
+                            var s = o.oCoords.bl.x + 20
+                              , c = o.oCoords.bl.y
+                              , l = e.fontRubricSize * i
+                              , b = e.fontRubricName
+                              , f = e.nameValRubric
+                              , h = new r.fabric.Text(f,{
+                                fontSize: l,
+                                fontFamily: b,
+                                fontWeight: "normal",
+                                originX: "left",
+                                originY: "bottom",
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode === u.PdfViewMode.signDocuments,
+                                lockMovementY: e.viewMode === u.PdfViewMode.signDocuments,
+                                selectable: !1,
+                                hasControls: !1,
+                                top: 5,
+                                left: 20 * i,
+                                data: o.data,
+                                hoverCursor: "default"
+                            })
+                              , p = new r.fabric.Rect({
+                                width: n,
+                                height: a,
+                                fill: "rgba(0, 152, 154, 0)",
+                                stroke: "rgba(0, 152, 154, 0)",
+                                top: 0,
+                                left: 0
+                            })
+                              , g = new r.fabric.Group([p, h],{
+                                left: s - 20 * i,
+                                top: c - 30 * i,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode !== u.PdfViewMode.markDocuments,
+                                lockMovementY: e.viewMode !== u.PdfViewMode.markDocuments,
+                                hasControls: !1,
+                                data: o.data
+                            });
+                            $(e.fabricObjects[e.activeCanvas].lowerCanvasEl).closest(".canvas-container").append("<div class='closeRubric' data-indice='" + (o.data ? o.data : 0) + "' style='position:absolute; top: " + (c - 23 * e.scale) + "px; left: " + (s - 25 * e.scale) + "px; font-size: " + 16 * i + "px'><i class='glyph ab-delete'></i></div>"),
+                            e.handleClickEditRubric();
+                            var m = new r.fabric.Text(f,{
+                                fontSize: l,
+                                fontFamily: b,
+                                fontWeight: "normal",
+                                originX: "left",
+                                originY: "bottom",
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: e.viewMode === u.PdfViewMode.signDocuments,
+                                lockMovementY: e.viewMode === u.PdfViewMode.signDocuments,
+                                selectable: !1,
+                                hasControls: !1,
+                                top: 5,
+                                left: 20 * i,
+                                data: o.data,
+                                hoverCursor: "default"
+                            });
+                            t.add(g);
+                            var v = m.toDataURL({
+                                format: "png",
+                                multiplier: 3
+                            });
+                            e.base64Rubric = v.replace("data:image/png;base64,", "");
+                            var S = e.serializePdf.bind(e)(o.data.index)
+                              , w = {
+                                pdfDocument: e.pdfObj,
+                                docInfoSerialize: S,
+                                base64Sign: e.base64,
+                                base64Rubric: e.base64Rubric,
+                                selectedCertificate: e.objSelectedCert
+                            };
+                            e.callback(w),
+                            e.signObject(S),
+                            $("#" + e.containerId + "ModalViewerRubric").modal("hide")
+                        } else
+                            d.warning(e.translate("chooseRubric"))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.handleClickEditSign = function() {
+                    var e = this;
+                    $(".closeSign").unbind("click").click((function() {
+                        e.base64 = null;
+                        $(this).data("indice");
+                        e.removeAllSignatures(),
+                        e.docInfo[e.docIndex].isDocSign = e.getDocsSign(),
+                        e.signObject(JSON.stringify(e.docInfo));
+                        var t = $(".inputPageChange").val().toString();
+                        e.loadPages(e.pdfObj, !0, (function() {
+                            e.gotoPage(Number(t) - 1)
+                        }
+                        ))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.removeAllSignatures = function() {
+                    for (var e = 0; e < this.docInfo[this.docIndex].section.length; e++)
+                        this.docInfo[this.docIndex].section[e].isRubric || (this.docInfo[this.docIndex].section[e] = this.objBind[this.docIndex].section[e])
+                }
+                ,
+                e.prototype.handleClickEditRubric = function() {
+                    var e = this;
+                    $(".closeRubric").unbind("click").click((function() {
+                        e.base64Rubric = null;
+                        $(this).data("indice");
+                        e.removeAllRubrics(),
+                        e.signObject(JSON.stringify(e.docInfo));
+                        var t = $(".inputPageChange").val().toString();
+                        e.loadPages(e.pdfObj, !0, (function() {
+                            e.gotoPage(Number(t) - 1)
+                        }
+                        ))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.removeAllRubrics = function() {
+                    for (var e = 0; e < this.docInfo[this.docIndex].section.length; e++)
+                        this.docInfo[this.docIndex].section[e].isRubric && (this.docInfo[this.docIndex].section[e] = this.objBind[this.docIndex].section[e])
+                }
+                ,
+                e.prototype.loadPages = function(e, t, i) {
+                    return a(this, void 0, void 0, (function() {
+                        var n, a, r;
+                        return o(this, (function(o) {
+                            switch (o.label) {
+                            case 0:
+                                n = this,
+                                $("#" + n.containerId).find(".pdf-container").empty(),
+                                n.pagesRendered = 0,
+                                a = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+                                document.querySelectorAll("#" + n.containerId + " .pdf-container")[0].clientWidth,
+                                r = 1,
+                                o.label = 1;
+                            case 1:
+                                return r <= e._pdfInfo.numPages ? [4, e.getPage(r).then((function(e) {
+                                    var o;
+                                    a <= 1024 && !t ? (o = e.getViewport({
+                                        scale: .5
+                                    }),
+                                    n.scale = .5) : o = e.getViewport({
+                                        scale: n.scale
+                                    });
+                                    var r = document.createElement("canvas");
+                                    $("#" + n.containerId).find(".pdf-container").append(r),
+                                    r.className = "pdf-canvas",
+                                    r.height = o.height,
+                                    r.width = o.width;
+                                    var s = {
+                                        canvasContext: r.getContext("2d"),
+                                        viewport: o
+                                    };
+                                    e.render(s).promise.then((function() {
+                                        if (n.pagesRendered++,
+                                        n.pagesRendered == n.numberOfPages) {
+                                            a <= 1024 && !t && (n.scale = .5),
+                                            $("#" + n.containerId + " .pdf-canvas").each((function(e, t) {
+                                                $(t).attr("id", "page-" + (e + 1) + "-canvas-" + n.containerId),
+                                                $(t).attr("href", "#page-" + (e + 1))
+                                            }
+                                            )),
+                                            n.initFabric(i);
+                                            var e = {
+                                                pdfDocument: n.pdfObj,
+                                                docInfoSerialize: n.serializePdf.bind(n)(),
+                                                base64Sign: n.base64,
+                                                base64Rubric: n.base64Rubric,
+                                                selectedCertificate: n.objSelectedCert
+                                            };
+                                            n.callback(e),
+                                            $(".loading").css("display", "none")
+                                        }
+                                    }
+                                    ))
+                                }
+                                ))] : [3, 4];
+                            case 2:
+                                o.sent(),
+                                o.label = 3;
+                            case 3:
+                                return r++,
+                                [3, 1];
+                            case 4:
+                                return [2]
+                            }
+                        }
+                        ))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.initFabric = function(e) {
+                    var t = this;
+                    t.fabricObjects = [],
+                    $("#" + t.containerId + " canvas").each((function(e, i) {
+                        var n = i.toDataURL("image/png")
+                          , a = new r.fabric.Canvas(i.id,{
+                            selection: !1,
+                            allowTouchScrolling: !0
+                        });
+                        t.fabricObjects.push(a),
+                        a.setBackgroundImage(n, a.renderAll.bind(a)),
+                        $(a.upperCanvasEl).click((function(i) {
+                            if (t.activeCanvas = e,
+                            t.viewMode === u.PdfViewMode.viewDocuments) {
+                                var n = {
+                                    pdfDocument: t.pdfObj,
+                                    docInfoSerialize: t.serializePdf.bind(t)(),
+                                    selectedPage: t.activeCanvas + 1
+                                };
+                                t.callback(n)
+                            }
+                        }
+                        ))
+                    }
+                    )),
+                    t.handlerScroll(),
+                    t.storageObj = sessionStorage.getItem("ObjSign"),
+                    t.storageObj && JSON.parse(t.storageObj).forEach((function(e, i) {
+                        if (t.docIndex == i) {
+                            var n = e.section;
+                            n && n.length > 0 && n.forEach((function(e, i) {
+                                var n;
+                                if (t.activeCanvas = e.pageNumber - 1,
+                                t.viewMode === u.PdfViewMode.signDocuments)
+                                    n = {
+                                        name: "",
+                                        idSubscriber: e.idSubscriber,
+                                        color: "#00989a",
+                                        isRubric: e.isRubric
+                                    };
+                                else if (t.viewMode === u.PdfViewMode.markDocuments) {
+                                    var a = $("#" + t.containerId).find("a[id='subscribers__signature__list__item__".concat(e.idSubscriber, "']"));
+                                    n = {
+                                        name: t.subscribersList.find((function(t) {
+                                            return t.id === e.idSubscriber
+                                        }
+                                        )).name,
+                                        idSubscriber: e.idSubscriber,
+                                        color: a.data("color"),
+                                        isRubric: e.isRubric
+                                    }
+                                }
+                                t.createRect(e, !1, n)
+                            }
+                            )),
+                            t.activeCanvas = 0
+                        }
+                    }
+                    )),
+                    "function" == typeof e && e()
+                }
+                ,
+                e.prototype.initModalSign = function() {
+                    var e = this;
+                    if (null === this.base64)
+                        e.IsEletronicSign || $("#" + this.containerId + "ModalViewer").find(".button--ghost").show().css("margin", "0 auto"),
+                        $("#" + this.containerId + "ModalViewer").find(".BtModalSalvarSign").text(this.translate("save")).addClass("sign-digital"),
+                        $("#" + this.containerId + "ModalViewer").find("form").show(),
+                        $("#" + this.containerId + "ModalViewer").find(".canvas-clone-container").hide(),
+                        $("#" + e.containerId + "ModalViewer").find(".radio-container").hide(),
+                        this.IsEletronicSign && $("#" + e.containerId + "ModalViewer").find(".modal-footer").hide(),
+                        $("#" + this.containerId + "ModalViewer").find(".BtSignGenerate").prop("disabled", !0),
+                        $("#" + e.containerId + "ModalViewer").find(".InputSignName").unbind("keyup").on("keyup", (function() {
+                            "" !== $("#" + e.containerId + "ModalViewer").find(".InputSignName").val().toString().trim() ? $("#" + e.containerId + "ModalViewer").find(".BtSignGenerate").prop("disabled", !1) : $("#" + e.containerId + "ModalViewer").find(".BtSignGenerate").prop("disabled", !0)
+                        }
+                        )),
+                        $("#" + e.containerId + "ModalViewer").find(".InputSignName").trigger("keyup"),
+                        $("#" + this.containerId + "ModalViewer").find(".BtSignGenerate").unbind("click").click((function() {
+                            var t = $("#" + e.containerId + "ModalViewer").find(".InputSignName").val().toString();
+                            e.nameValSign = t,
+                            e.createSignChoseModal(e.nameValSign),
+                            $("#" + e.containerId + "ModalViewer").find(".radio-container").show(),
+                            $("#" + e.containerId + "ModalViewer").find(".modal-footer").show()
+                        }
+                        ));
+                    else {
+                        $("input[name=choseSign" + this.containerId + "]:checked").val();
+                        if ($("#" + this.containerId + "ModalViewer").find(".button--ghost").removeClass("sign-digital").show().removeAttr("style"),
+                        $("#" + this.containerId + "ModalViewer").find(".BtModalSalvarSign").text("OK").removeClass("sign-digital").show(),
+                        $("#" + this.containerId + "ModalViewer").find("form").hide(),
+                        $("#" + this.containerId + "ModalViewer").find(".canvas-clone-container").show(),
+                        $("#CanvasSignClone" + this.containerId).attr("id", "CanvasSign1" + this.containerId).text(this.nameValSign).css({
+                            "font-size": this.fontSignSize + "px",
+                            "font-family": this.fontSignName
+                        }),
+                        !e.IsEletronicSign) {
+                            var t = this.getCertInfoNormalize();
+                            $(".canvas-clone").html(t.replace(/\n/g, "<br />"))
+                        }
+                    }
+                    this.setAccreditationSignType()
+                }
+                ,
+                e.prototype.initModalRubric = function() {
+                    var e = this;
+                    if (null === this.base64Rubric)
+                        $("#" + this.containerId + "ModalViewerRubric").find(".BtModalSalvarRubric").text(this.translate("save")).addClass("sign-digital"),
+                        $("#" + this.containerId + "ModalViewerRubric").find("form").show(),
+                        $("#" + this.containerId + "ModalViewerRubric").find(".canvas-clone-container").hide(),
+                        $("#" + e.containerId + "ModalViewerRubric").find(".radio-container").hide(),
+                        $("#" + e.containerId + "ModalViewerRubric").find(".modal-footer").hide(),
+                        $("#" + this.containerId + "ModalViewerRubric").find(".BtRubricGenerate").prop("disabled", !0),
+                        $("#" + e.containerId + "ModalViewerRubric").find(".InputRubricName").unbind("keyup").on("keyup", (function() {
+                            "" !== $("#" + e.containerId + "ModalViewerRubric").find(".InputRubricName").val().toString() ? $("#" + e.containerId + "ModalViewerRubric").find(".BtRubricGenerate").prop("disabled", !1) : $("#" + e.containerId + "ModalViewerRubric").find(".BtRubricGenerate").prop("disabled", !0)
+                        }
+                        )),
+                        $("#" + e.containerId + "ModalViewerRubric").find(".InputRubricName").trigger("keyup"),
+                        $("#" + this.containerId + "ModalViewerRubric").find(".BtRubricGenerate").unbind("click").click((function() {
+                            var t = $("#" + e.containerId + "ModalViewerRubric").find(".InputRubricName").val().toString();
+                            e.nameValRubric = t,
+                            e.createRubricChoseModal(e.nameValRubric),
+                            $("#" + e.containerId + "ModalViewerRubric").find(".radio-container").show(),
+                            $("#" + e.containerId + "ModalViewerRubric").find(".modal-footer").show()
+                        }
+                        ));
+                    else {
+                        $("input[name=choseRubric" + this.containerId + "]:checked").val();
+                        $("#" + this.containerId + "ModalViewerRubric").find(".button--ghost").removeClass("sign-digital").show().removeAttr("style"),
+                        $("#" + this.containerId + "ModalViewerRubric").find(".BtModalSalvarRubric").text("OK").removeClass("sign-digital").show(),
+                        $("#" + this.containerId + "ModalViewerRubric").find("form").hide(),
+                        $("#" + this.containerId + "ModalViewerRubric").find(".canvas-clone-container").show(),
+                        $("#CanvasRubricClone" + this.containerId).attr("id", "CanvasRubric1" + this.containerId).text(this.nameValRubric).css({
+                            "font-size": this.fontRubricSize + "px",
+                            "font-family": this.fontRubricName
+                        })
+                    }
+                    this.setAccreditationRubricType()
+                }
+                ,
+                e.prototype.setAccreditationSignType = function() {
+                    this.IsEletronicSign ? ($("#" + this.containerId + "ModalViewer").find(".sign-digital").show(),
+                    $("#" + this.containerId + "ModalViewer").find(".certificates").hide()) : ($("#" + this.containerId + "ModalViewer").find(".certificates").show(),
+                    $("#" + this.containerId + "ModalViewer").find(".sign-digital").hide(),
+                    this.HasCertificates ? this.generateHTMLCertificates() : (d.warning(this.translate("certificatesNotFound")),
+                    $("#" + this.containerId + "ModalViewer").modal("hide")))
+                }
+                ,
+                e.prototype.setAccreditationRubricType = function() {
+                    $("#" + this.containerId + "ModalViewerRubric").find(".rubric-digital").show(),
+                    $("#" + this.containerId + "ModalViewerRubric").find(".certificates").hide()
+                }
+                ,
+                e.prototype.generateHTMLCertificates = function() {
+                    var e = document.getElementById("certificates-list-".concat(this.containerId));
+                    e.innerHTML = null;
+                    for (var t = 0, i = this.options.certificates; t < i.length; t++) {
+                        var n = i[t]
+                          , a = document.createElement("a");
+                        a.id = n.id,
+                        a.className = "list-simple-item",
+                        a.addEventListener("click", this.certificateClick.bind(this));
+                        var o = document.createElement("i");
+                        o.className = "glyph ab-doc icon--22";
+                        var r = document.createElement("div");
+                        r.innerText = n.name,
+                        a.append(o),
+                        a.append(r),
+                        e.append(a)
+                    }
+                }
+                ,
+                e.prototype.certificateClick = function(e) {
+                    var t = e.currentTarget.id;
+                    this.objSelectedCert = this.options.certificates.find((function(e) {
+                        return e.id === t
+                    }
+                    )),
+                    $("#" + this.containerId + "ModalViewer").find(".BtModalSalvarSign").click(),
+                    $("#" + this.containerId + "ModalViewer").find(".BtModalSalvarRubric").click()
+                }
+                ,
+                e.prototype.getCertInfoNormalize = function() {
+                    var e = this.objSelectedCert.cpfCnpj && this.objSelectedCert.cpfCnpj.length > 11;
+                    return "".concat(this.translate("name"), ": ").concat(b.Utils.wordWrap(this.objSelectedCert.name, 40), "\n") + "".concat(e ? "CNPJ" : "CPF", ": ").concat(this.objSelectedCert.cpfCnpj, "\n") + "".concat(this.translate("validate"), ": ").concat(this.objSelectedCert.expirationDate.toLocaleDateString(), "\n") + "".concat(this.translate("emitter"), ": ").concat(b.Utils.wordWrap(this.objSelectedCert.emitter, 40), "\n") + "".concat(this.translate("date"), ": ").concat(this.objSelectedCert.currentDate.toLocaleDateString())
+                }
+                ,
+                e.prototype.createSignChoseModal = function(e) {
+                    var t = this;
+                    $("#" + this.containerId + "ModalViewer .canvas-sign--1").attr("id", "CanvasSign1" + this.containerId).text(e).css({
+                        "font-size": "28px",
+                        "font-family": "kalamaya-Regular"
+                    }),
+                    $("#" + this.containerId + "ModalViewer .canvas-sign--2").attr("id", "CanvasSign2" + this.containerId).text(e).css({
+                        "font-size": "23px",
+                        "font-family": "BeautifulHeart"
+                    }),
+                    $("#" + this.containerId + "ModalViewer .canvas-sign--3").attr("id", "CanvasSign3" + this.containerId).text(e).css({
+                        "font-size": "25px",
+                        "font-family": "Mistral"
+                    }),
+                    $("input[name=choseSign" + this.containerId + "]").click((function() {
+                        switch ($(this).val()) {
+                        case "1":
+                            t.fontSignName = "kalamaya-Regular",
+                            t.fontSignSize = 28;
+                            break;
+                        case "2":
+                            t.fontSignName = "BeautifulHeart",
+                            t.fontSignSize = 23;
+                            break;
+                        case "3":
+                            t.fontSignName = "Mistral",
+                            t.fontSignSize = 25;
+                            break;
+                        default:
+                            t.fontSignName = "kalamaya-Regular",
+                            t.fontSignSize = 28
+                        }
+                    }
+                    ))
+                }
+                ,
+                e.prototype.createRubricChoseModal = function(e) {
+                    var t = this;
+                    $("#" + this.containerId + "ModalViewerRubric .canvas-rubric--1").attr("id", "CanvasRubric1" + this.containerId).text(e).css({
+                        "font-size": "28px",
+                        "font-family": "kalamaya-Regular"
+                    }),
+                    $("#" + this.containerId + "ModalViewerRubric .canvas-rubric--2").attr("id", "CanvasRubric2" + this.containerId).text(e).css({
+                        "font-size": "23px",
+                        "font-family": "BeautifulHeart"
+                    }),
+                    $("#" + this.containerId + "ModalViewerRubric .canvas-rubric--3").attr("id", "CanvasRubric3" + this.containerId).text(e).css({
+                        "font-size": "25px",
+                        "font-family": "Mistral"
+                    }),
+                    $("input[name=choseRubric" + this.containerId + "]").click((function() {
+                        switch ($(this).val()) {
+                        case "1":
+                            t.fontRubricName = "kalamaya-Regular",
+                            t.fontRubricSize = 28;
+                            break;
+                        case "2":
+                            t.fontRubricName = "BeautifulHeart",
+                            t.fontRubricSize = 23;
+                            break;
+                        case "3":
+                            t.fontRubricName = "Mistral",
+                            t.fontRubricSize = 25;
+                            break;
+                        default:
+                            t.fontRubricName = "kalamaya-Regular",
+                            t.fontRubricSize = 28
+                        }
+                    }
+                    ))
+                }
+                ,
+                e.prototype.getDocsSign = function(e) {
+                    var t = this.docInfo[this.docIndex].section.filter((function(e) {
+                        return !0 === e.isSign
+                    }
+                    )).length >= this.docInfo[this.docIndex].section.length;
+                    t ? $("#" + this.containerId).find(".menu__document a:eq(".concat(this.docIndex, ") i")).removeClass("ab-doc").addClass("ab-confirm").addClass("green") : $("#" + this.containerId).find(".menu__document a:eq(".concat(this.docIndex, ") i")).removeClass("ab-confirm").addClass("ab-doc").removeClass("green");
+                    var i = $("#" + this.containerId).find(".menu__document a .ab-doc").length;
+                    $("#callOutDocs").text(i);
+                    for (var n = 0, a = 0, o = 0; o < this.docInfo.length; o++)
+                        n += this.docInfo[o].section.length;
+                    for (var r = 0; r < this.docInfo.length; r++)
+                        a += this.docInfo[r].section.filter((function(e) {
+                            return !0 === e.isSign
+                        }
+                        )).length;
+                    var s = 100 * a / n;
+                    return $("#signProgress").width(s + "%"),
+                    $("#signedCount").text(a),
+                    $("#signedTotal").text(n),
+                    t
+                }
+                ,
+                e.prototype.removeBeforeUnload = function() {
+                    window.onbeforeunload = void 0
+                }
+                ,
+                e.prototype.setBeforeUnload = function(e) {
+                    var t = this.translate("thereAreUnsavedItems");
+                    return e.returnValue = this.storageObj ? t : null,
+                    this.storageObj ? t : null
+                }
+                ,
+                e.prototype.loadDocument = function(e, t, i) {
+                    $("#" + this.containerId).find(".pdf-container").html(""),
+                    $(".loading").css("display", "block");
+                    var n = this;
+                    this.url = e,
+                    this.docName = t,
+                    this.docIndex = i,
+                    this.currentMarkFocus = void 0,
+                    this.activeCanvas = 0,
+                    this.scale = 1.31,
+                    this.PDFJSViewer.getDocument(e).promise.then((function(e) {
+                        n.pdfObj = e,
+                        n.numberOfPages = e.numPages,
+                        $("#" + n.containerId).find(".tooglePages span").text(n.numberOfPages),
+                        n.loadPages(e, !1)
+                    }
+                    ), (function(e) {
+                        throw console.error(e),
+                        d.error(n.translate("errorLoadDoc") + e),
+                        $(".loading").css("display", "none"),
+                        new Error(n.translate("errorLoadDoc") + e)
+                    }
+                    ))
+                }
+                ,
+                e.prototype.createRect = function(e, t, i) {
+                    var n = this
+                      , a = n.fabricObjects[n.activeCanvas];
+                    n.fabricObjects.length > 0 && $.each(n.fabricObjects, (function(e, t) {
+                        t.isDrawingMode = !1
+                    }
+                    )),
+                    e && e.type && e.type != u.SectionTypeEnum.Sign && e.type == u.SectionTypeEnum.Annotation ? this.createAnnotationRect(e, t, a) : this.createSignRect(e, t, a, i),
+                    a.on("mouse:down", (function(e, t) {
+                        null != e.target && n.unhandlerScroll()
+                    }
+                    )),
+                    a.on("mouse:up", (function(e, t) {
+                        n.handlerScroll();
+                        var i = e.target;
+                        if ($("#" + n.containerId + " .canvas-container").find(".scrollDiv").hide(),
+                        null != i && n.viewMode !== u.PdfViewMode.viewDocuments) {
+                            if (n.viewMode === u.PdfViewMode.signDocuments) {
+                                $(e.target.canvas.lowerCanvasEl).next().click();
+                                var a = n.docInfo[n.docIndex].section.find((function(e) {
+                                    return e.index === i.data.index
+                                }
+                                ));
+                                n.currentMarkFocus = a,
+                                a.isSign || a.isRubric || ($("body > .abl-modal-viewer")[0] || $("#" + n.containerId).find(".abl-modal-viewer").appendTo("body"),
+                                $("#" + n.containerId + "ModalViewer").modal("show"),
+                                n.handleClickModalSign(),
+                                n.initModalSign()),
+                                !a.isSign && a.isRubric && ($("body > .abl-modal-viewer")[0] || $("#" + n.containerId).find(".abl-modal-viewer").appendTo("body"),
+                                $("#" + n.containerId + "ModalViewerRubric").modal("show"),
+                                n.handleClickModalRubric(),
+                                n.initModalRubric())
+                            }
+                            if (n.viewMode === u.PdfViewMode.markDocuments) {
+                                var o = n.serializePdf.bind(n)()
+                                  , r = {
+                                    pdfDocument: n.pdfObj,
+                                    docInfoSerialize: o,
+                                    base64Sign: n.base64,
+                                    base64Rubric: n.base64Rubric,
+                                    selectedCertificate: n.objSelectedCert
+                                };
+                                n.callback(r),
+                                n.signObject(o)
+                            }
+                        }
+                    }
+                    )),
+                    a.on("object:moving", (function(e) {
+                        var t, i, n = e.target, a = n.canvas, o = n.top, r = n.left, s = a.getZoom(), c = a.viewportTransform[4], l = a.viewportTransform[5], d = a.width / s, u = a.height / s, b = n.width * n.scaleX;
+                        "center" == n.originX ? t = i = b / 2 : (t = 0,
+                        i = b);
+                        var f, h, p = n.height * n.scaleY;
+                        "center" == n.originY ? f = h = p / 2 : (f = 0,
+                        h = p);
+                        var g = 0 + f - l
+                          , m = u - h - 0 - l
+                          , v = 0 + t - c
+                          , S = d - i - 0 - c;
+                        b > d ? n.set("left", v) : n.set("left", Math.min(Math.max(r, v), S)),
+                        p > u ? n.set("top", g) : n.set("top", Math.min(Math.max(o, g), m))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.createSignRect = function(e, t, i, n) {
+                    var a = this
+                      , o = a.scale
+                      , s = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? 225 * o : 266 * o
+                      , c = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? 30 * o : 86 * o;
+                    if (e && e.isSign) {
+                        var l = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? "bottom" : "top"
+                          , d = n.isRubric ? a.fontRubricSize : a.fontSignSize
+                          , f = n.isRubric ? a.fontRubricName : a.fontSignName
+                          , h = n.isRubric ? a.nameValRubric : a.nameValSign
+                          , p = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? d * o : 10 * o
+                          , g = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? f : "Arial"
+                          , m = a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? h : a.getCertInfoNormalize()
+                          , v = e ? i.height - (a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? e.bottom : e.bottom + 85) * o : 0
+                          , S = new r.fabric.Text(m,{
+                            fontSize: p,
+                            fontFamily: g,
+                            fontWeight: "normal",
+                            originX: "left",
+                            originY: l,
+                            lockScalingX: !0,
+                            lockScalingY: !0,
+                            lockRotation: !0,
+                            lockMovementX: a.viewMode === u.PdfViewMode.signDocuments,
+                            lockMovementY: a.viewMode === u.PdfViewMode.signDocuments,
+                            selectable: !1,
+                            hasControls: !1,
+                            top: v,
+                            left: e ? (e.left + 18) * o : 0,
+                            data: {
+                                index: e.index,
+                                isRubric: n.isRubric
+                            },
+                            hoverCursor: "default"
+                        });
+                        i.add(S);
+                        var w = n.isRubric ? "closeRubric" : "closeSign";
+                        $(a.fabricObjects[a.activeCanvas].lowerCanvasEl).closest(".canvas-container").append("<div class='" + w + "' data-indice='" + (e.index ? e.index : 0) + "' style='position:absolute; top: " + (i.height - (a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? e.bottom + 30 : e.bottom + 90) * o) + "px; left: " + ((e ? e.left * o : 0) - 10 * a.scale) + "px; font-size: " + 16 * o + "px'><i class='glyph ab-delete'></i></div>"),
+                        n.isRubric ? a.handleClickEditRubric() : a.handleClickEditSign()
+                    } else
+                        r.fabric.Image.fromURL("//cdn.abaris.com.br/assets/img/icone-marcacao.png", (function(l) {
+                            var d = l.scale(.3 * o).set({
+                                left: 3,
+                                top: 5
+                            })
+                              , f = new r.fabric.Rect({
+                                width: s,
+                                height: c,
+                                fill: n.color + "99",
+                                stroke: n.color,
+                                top: 0,
+                                left: 0
+                            })
+                              , h = n.isRubric ? a.translate("rubric") : a.translate("subscriber")
+                              , p = "".concat(h, ": ").concat(n.name)
+                              , g = b.Utils.truncateString(p, 33);
+                            a.viewMode === u.PdfViewMode.signDocuments && (g = n.isRubric ? a.translate("rubricateHere") : a.translate("signHere"));
+                            var m = new r.fabric.Text(g,{
+                                fontSize: 12 * o,
+                                fontFamily: "Open sans",
+                                fontWeight: "bold",
+                                originX: "left",
+                                originY: "center",
+                                top: 15 * o,
+                                left: 30 * o,
+                                data: e ? e.index : 0
+                            })
+                              , v = e ? i.height - (a.IsEletronicSign || (null == n ? void 0 : n.isRubric) ? e.bottom + 30 : e.bottom + 87) * o : 0
+                              , S = new r.fabric.Group([d, f, m],{
+                                left: e ? e.left * o : 0,
+                                top: v,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: a.viewMode !== u.PdfViewMode.markDocuments,
+                                lockMovementY: a.viewMode !== u.PdfViewMode.markDocuments,
+                                hasControls: !1,
+                                data: {
+                                    index: e ? e.index : 0,
+                                    idSubscriber: n.idSubscriber,
+                                    isRubric: n.isRubric
+                                }
+                            });
+                            if (i.add(S),
+                            t) {
+                                var w = a.serializePdf.bind(a)()
+                                  , y = {
+                                    pdfDocument: a.pdfObj,
+                                    docInfoSerialize: w,
+                                    base64Sign: a.base64,
+                                    base64Rubric: a.base64Rubric,
+                                    selectedCertificate: a.objSelectedCert
+                                };
+                                a.callback(y),
+                                a.signObject(w)
+                            }
+                        }
+                        ))
+                }
+                ,
+                e.prototype.createAnnotationRect = function(e, t, i) {
+                    var n, a = this.scale, o = e.width * a, s = e.height * a, c = e.top * a, l = e.left * a, d = "", f = 5 * a;
+                    switch (e.annotationType) {
+                    case u.AnnotationTypeEnum.Highlight:
+                        n = "rgba(229, 223, 51, 0.5)";
+                        break;
+                    case u.AnnotationTypeEnum.TextCap:
+                        n = "rgba(0, 0, 0, 1)";
+                        break;
+                    case u.AnnotationTypeEnum.Postit:
+                        n = "rgba(255, 255, 255, 1)",
+                        d = "rgba(0, 0, 0, 1)"
+                    }
+                    var h = new r.fabric.Rect({
+                        width: o,
+                        height: s,
+                        fill: n,
+                        stroke: d,
+                        top: c,
+                        left: l,
+                        selectable: !1,
+                        lockScalingX: !0,
+                        lockScalingY: !0,
+                        lockRotation: !0,
+                        lockMovementX: !0,
+                        lockMovementY: !0,
+                        hasControls: !1,
+                        hoverCursor: "default",
+                        moveCursor: "default"
+                    });
+                    if (e.annotationType == u.AnnotationTypeEnum.Postit) {
+                        var p = "";
+                        if (e.text && "" !== e.text) {
+                            p = b.Utils.wordWrap(e.text, o / (7 * a));
+                            var g = new r.fabric.Text(p,{
+                                fontSize: 15 * a,
+                                fontFamily: "Arial",
+                                fontWeight: "normal",
+                                top: c + 3 * a,
+                                left: l + f
+                            })
+                              , m = new r.fabric.Rect({
+                                width: o,
+                                height: s,
+                                fill: "rgba(0, 0, 0, 0.3)",
+                                top: c + f,
+                                left: l + f,
+                                selectable: !1,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: !0,
+                                lockMovementY: !0,
+                                hasControls: !1
+                            })
+                              , v = new r.fabric.Group([m, h, g],{
+                                left: l,
+                                top: c,
+                                selectable: !1,
+                                lockScalingX: !0,
+                                lockScalingY: !0,
+                                lockRotation: !0,
+                                lockMovementX: !0,
+                                lockMovementY: !0,
+                                hasControls: !1,
+                                hoverCursor: "default",
+                                moveCursor: "default"
+                            });
+                            i.add(v)
+                        }
+                    } else if (e.annotationType == u.AnnotationTypeEnum.Stamp) {
+                        var S = new r.fabric.Rect({
+                            width: o,
+                            height: s,
+                            fill: "rgba(0, 0, 0, 0)",
+                            stroke: e.color,
+                            strokeWidth: 10 * a,
+                            rx: 10,
+                            ry: 10,
+                            left: l,
+                            top: c,
+                            opacity: .7
+                        })
+                          , w = new r.fabric.Textbox(e.text,{
+                            fontSize: 15 * o / 100,
+                            fontFamily: "Arial",
+                            fontWeight: "normal",
+                            width: o,
+                            height: s,
+                            textAlign: "left",
+                            fill: e.color,
+                            left: l + 12 * a,
+                            top: c + 10 * a,
+                            scaleY: 1.5,
+                            scaleX: 1.5,
+                            opacity: .7
+                        })
+                          , y = new r.fabric.Group([S, w],{
+                            left: l,
+                            top: c,
+                            selectable: !1,
+                            lockScalingX: !0,
+                            lockScalingY: !0,
+                            lockRotation: !0,
+                            lockMovementX: !0,
+                            lockMovementY: !0,
+                            hasControls: !1,
+                            hoverCursor: "default",
+                            moveCursor: "default"
+                        });
+                        i.add(y)
+                    } else
+                        i.add(h)
+                }
+                ,
+                e.prototype.handlerScroll = function() {
+                    $("#" + this.containerId + " .pdf-container").on("touchstart", (function(e) {
+                        var t = e.touches[0].clientY
+                          , i = e.touches[0].clientX
+                          , n = 0
+                          , a = 0;
+                        function o(e) {
+                            n = e.touches[0].clientY - t,
+                            a = e.touches[0].clientX - i,
+                            $(this).stop().animate({
+                                scrollTop: $(this).scrollTop() - n
+                            }, 500, "swing"),
+                            $(this).scrollLeft($(this).scrollLeft() - a)
+                        }
+                        $(this).on("touchmove", o).one("touchend", (function() {
+                            $(this).off("touchmove", o)
+                        }
+                        ))
+                    }
+                    ))
+                }
+                ,
+                e.prototype.unhandlerScroll = function() {
+                    $("#" + this.containerId + " .pdf-container").off("touchstart")
+                }
+                ,
+                e.prototype.signObject = function(e) {
+                    e ? sessionStorage.setItem("ObjSign", e) : sessionStorage.removeItem("ObjSign")
+                }
+                ,
+                e.prototype.reloadPdfByFabricObjects = function() {
+                    var e = sessionStorage.getItem("ObjSign")
+                      , t = JSON.parse(e);
+                    t[this.docIndex].section = [],
+                    this.docInfo[this.docIndex].section = [];
+                    var i = JSON.stringify(t, null, 4);
+                    this.signObject(i)
+                }
+                ,
+                e.prototype.deleteSelectedObject = function() {
+                    var e = this.fabricObjects[this.activeCanvas].getActiveObject();
+                    if (e) {
+                        if (confirm(this.translate("deleteMarkup"))) {
+                            this.fabricObjects[this.activeCanvas].remove(e),
+                            this.reloadPdfByFabricObjects();
+                            var t = this.serializePdf.bind(this)()
+                              , i = {
+                                pdfDocument: this.pdfObj,
+                                docInfoSerialize: t,
+                                base64Sign: this.base64,
+                                base64Rubric: this.base64Rubric,
+                                selectedCertificate: this.objSelectedCert
+                            };
+                            this.callback(i),
+                            this.signObject(t)
+                        }
+                    } else
+                        d.warning(this.translate("selectMarkup"))
+                }
+                ,
+                e.prototype.clearActivePage = function() {
+                    var e = this.fabricObjects[this.activeCanvas]
+                      , t = e.backgroundImage;
+                    if (confirm(this.translate("deleteAllMarkup"))) {
+                        e.clear(),
+                        e.setBackgroundImage(t, e.renderAll.bind(e)),
+                        this.reloadPdfByFabricObjects();
+                        var i = this.serializePdf.bind(this)()
+                          , n = {
+                            pdfDocument: this.pdfObj,
+                            docInfoSerialize: i,
+                            base64Sign: this.base64,
+                            base64Rubric: this.base64Rubric,
+                            selectedCertificate: this.objSelectedCert
+                        };
+                        this.callback(n),
+                        this.signObject(i)
+                    }
+                }
+                ,
+                e.prototype.serializePdf = function(e) {
+                    void 0 === e && (e = null);
+                    var t = this
+                      , i = this.scale;
+                    t.storageObj = sessionStorage.getItem("ObjSign");
+                    var n = JSON.parse(t.storageObj);
+                    return this.objFileList.forEach((function(e, i) {
+                        t.docInfo[i] = {
+                            fileName: e.fileName,
+                            section: n && n[i].section && n[i].section.length > 0 ? n[i].section : [],
+                            isDocSign: !(!n || !n[i].isDocSign)
+                        }
+                    }
+                    )),
+                    this.viewMode === u.PdfViewMode.signDocuments ? (t.fabricObjects.forEach((function(i, n) {
+                        i._objects.forEach((function(i, a) {
+                            var o = t.docInfo[t.docIndex].section.findIndex((function(e) {
+                                return e.index === i.data.index
+                            }
+                            ));
+                            i.data.index === e && (t.docInfo[t.docIndex].section[o].isSign = !(!t.base64 && !t.base64Rubric || e !== i.data.index)),
+                            t.docInfo[t.docIndex].section[o].pageNumber = n + 1,
+                            t.docInfo[t.docIndex].section[o].type = i.data.type
+                        }
+                        ))
+                    }
+                    )),
+                    t.docInfo[t.docIndex].isDocSign = t.getDocsSign()) : this.viewMode !== u.PdfViewMode.viewDocuments && t.docInfo[t.docIndex].section && (t.fabricObjects && t.fabricObjects.filter((function(e) {
+                        return e._objects.length > 0
+                    }
+                    )).length > 0 && (t.docInfo[t.docIndex].section = []),
+                    t.fabricObjects.forEach((function(e, n) {
+                        e._objects.forEach((function(a, o) {
+                            var r = a.oCoords.bl.x / i
+                              , s = e.height / i - a.oCoords.bl.y / i;
+                            t.docInfo[t.docIndex].section.push({
+                                left: r >= 0 ? r : 0,
+                                bottom: s >= 0 ? s : 0,
+                                pageNumber: n + 1,
+                                index: a.data.index,
+                                idSubscriber: a.data.idSubscriber,
+                                isSign: !1,
+                                isRubric: a.data.isRubric
+                            })
+                        }
+                        ))
+                    }
+                    ))),
+                    this.viewMode === u.PdfViewMode.markDocuments && this.verifySectionsUpdateSubscribersListStatus(),
+                    JSON.stringify(this.docInfo, null, 4)
+                }
+                ,
+                e.prototype.goToSignature = function(e) {
+                    var t, i = this;
+                    if (this.fabricObjects.forEach((function(n, a) {
+                        n._objects.forEach((function(n, a) {
+                            e === n.data.index && (t = i.docInfo[i.docIndex].section.find((function(t) {
+                                return e === t.index
+                            }
+                            )))
+                        }
+                        ))
+                    }
+                    )),
+                    t) {
+                        var n = $("#" + this.containerId + " .pdf-container")
+                          , a = this.calcDisplacementToPage(t.pageNumber)
+                          , o = i.IsEletronicSign || (null == t ? void 0 : t.isRubric) ? 30 : 87
+                          , r = a + 20 - t.bottom * this.scale - o * this.scale;
+                        n.animate({
+                            scrollTop: r
+                        }, 500, "swing")
+                    } else
+                        d.warning(this.translate("markNotFound"))
+                }
+                ,
+                e.prototype.calcDisplacementToPage = function(e) {
+                    for (var t = $("#" + this.containerId + " .pdf-container"), i = 0, n = 0; n < e; n++) {
+                        var a = 0;
+                        n > 0 && (a = 25),
+                        i += t[0].childNodes[n].clientHeight + a
+                    }
+                    return i
+                }
+                ,
+                e.prototype.verifyMarksFilterSections = function() {
+                    var e = this;
+                    return this.docInfo[this.docIndex].section.filter((function(t) {
+                        return !!e.marksFilterRubrics && t.isRubric || !!e.marksFilterSignatures && !t.isRubric
+                    }
+                    )).map((function(t) {
+                        return n(n({}, t), {
+                            bottom: t.bottom * e.scale
+                        })
+                    }
+                    )).sort((function(e, t) {
+                        return (e.pageNumber === t.pageNumber ? 0 : 1) || t.bottom - e.bottom
+                    }
+                    ))
+                }
+                ,
+                e.prototype.goToNextSignature = function() {
+                    var e = this;
+                    if (this.marksFilterRubrics || this.marksFilterSignatures) {
+                        var t, i = this.verifyMarksFilterSections(), n = i.findIndex((function(t) {
+                            var i;
+                            return t.index === (null === (i = e.currentMarkFocus) || void 0 === i ? void 0 : i.index)
+                        }
+                        ));
+                        if (-1 == n)
+                            (t = i[0]) ? (this.goToSignature(t.index),
+                            this.currentMarkFocus = t) : d.warning(this.translate("markNotFound"));
+                        else if (++n >= i.length - 1)
+                            (t = i[n]) ? (this.goToSignature(t.index),
+                            this.currentMarkFocus = t) : this.docIndex + 1 <= this.fileList.length + 1 && $("#" + this.containerId).find(".menu__document a:eq(" + (this.docIndex + 1) + ")").trigger("click")
+                    } else
+                        d.warning(this.translate("selectOneMarkupType"))
+                }
+                ,
+                e.prototype.goToPrevSignature = function() {
+                    var e = this;
+                    if (this.marksFilterRubrics || this.marksFilterSignatures) {
+                        var t, i = this.verifyMarksFilterSections(), n = i.findIndex((function(t) {
+                            var i;
+                            return t.index === (null === (i = e.currentMarkFocus) || void 0 === i ? void 0 : i.index)
+                        }
+                        ));
+                        if (-1 == n)
+                            (t = i[0]) ? (this.goToSignature(t.index),
+                            this.currentMarkFocus = t) : d.warning(this.translate("markNotFound"));
+                        else if (--n <= 0)
+                            (t = i[n]) ? (this.goToSignature(t.index),
+                            this.currentMarkFocus = t) : this.docIndex - 1 >= 0 && $("#" + this.containerId).find(".menu__document a:eq(" + (this.docIndex - 1) + ")").trigger("click")
+                    } else
+                        d.warning(this.translate("selectOneMarkupType"))
+                }
+                ,
+                e.prototype.gotoPage = function(e) {
+                    (e < 0 && (e = 0),
+                    e <= this.numberOfPages) ? document.querySelectorAll("#" + this.containerId + " .pdf-container")[0].scrollTop = this.calcDisplacementToPage(e) : d.warning(this.translate("incorrectPageNumber"))
+                }
+                ,
+                e.prototype.zoomDoc = function(e) {
+                    if ("in" === e && this.scale <= 2.8 && (this.scale = this.scale + .3,
+                    this.loadPages(this.pdfObj, !0)),
+                    "out" === e) {
+                        var t = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                        (this.scale >= 1 || t <= 1024 && this.scale >= .5) && (this.scale = this.scale - .3,
+                        this.loadPages(this.pdfObj, !0))
+                    }
+                }
+                ,
+                e.prototype.download = function(e, t) {
+                    var i = document.createElement("a");
+                    if (!i.click)
+                        throw new Error('DownloadManager: "a.click()" is not supported.');
+                    i.href = e,
+                    i.target = "_blank",
+                    "download"in i && (i.download = t),
+                    (document.body || document.documentElement).appendChild(i),
+                    i.click(),
+                    i.remove()
+                }
+                ,
+                e.prototype.printDoc = function() {
+                    var e = new c.jsPDF;
+                    $.each(this.fabricObjects, (function(t, i) {
+                        -1 != i.lowerCanvasEl.id.indexOf("page") && (0 != t && (e.addPage(),
+                        e.setPage(t + 1)),
+                        e.addImage(i.toDataURL(), "png", 0, 0, i.width, i.height))
+                    }
+                    )),
+                    this.download(e.output("bloburl"), "pdf.pdf")
+                }
+                ,
+                e.prototype.resizeImage = function(e, t, i, n) {
+                    var a, o, r = 0, s = e, c = t;
+                    return s > i && (a = i,
+                    o = c * (r = i / s),
+                    c *= r,
+                    s *= r),
+                    c > n && (o = n,
+                    a = s * (r = n / c),
+                    s *= r,
+                    c *= r),
+                    {
+                        newWidth: Math.round(a),
+                        newHeight: Math.round(o)
+                    }
+                }
+                ,
+                e
+            }();
+            t.ViewerPdf = h
+        },
+        289: function(e, t) {},
+        290: function(e, t) {},
+        291: function(e, t) {},
+        293: function(e, t) {},
+        294: function(e, t) {},
+        295: function(e, t) {},
+        296: function(e, t) {},
+        297: function(e, t) {}
+    })
+}
+));
+//# sourceMappingURL=viewer.js.map
